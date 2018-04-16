@@ -27,12 +27,12 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ComboBox layoutX="37.0" layoutY="110.0" prefHeight="77.0" prefWidth="384.0" promptText="Categories" />
-            <TextField layoutX="889.0" layoutY="110.0" prefHeight="77.0" prefWidth="391.0" promptText="Amount" />
-            <ComboBox layoutX="496.0" layoutY="212.0" prefHeight="77.0" prefWidth="208.0" promptText="Date" />
-            <ComboBox layoutX="742.0" layoutY="210.0" prefHeight="77.0" prefWidth="248.0" promptText="Month" />
-            <ComboBox layoutX="1021.0" layoutY="209.0" prefHeight="77.0" prefWidth="248.0" promptText="Year" />
-            <Button layoutX="582.0" layoutY="322.0" mnemonicParsing="false" text="Submit" />
+            <ComboBox fx:id="categories" layoutX="37.0" layoutY="110.0" prefHeight="77.0" prefWidth="384.0" promptText="Categories" />
+            <TextField fx:id="amount" layoutX="889.0" layoutY="110.0" prefHeight="77.0" prefWidth="391.0" promptText="Amount" />
+            <ComboBox fx:id="date" layoutX="496.0" layoutY="212.0" prefHeight="77.0" prefWidth="208.0" promptText="Date" />
+            <ComboBox fx:id="month" layoutX="742.0" layoutY="210.0" prefHeight="77.0" prefWidth="248.0" promptText="Month" />
+            <ComboBox fx:id="year" layoutX="1021.0" layoutY="209.0" prefHeight="77.0" prefWidth="248.0" promptText="Year" />
+            <Button layoutX="582.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleRecord" text="Submit" />
          </children>
       </AnchorPane>
    </children>
