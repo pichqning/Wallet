@@ -11,9 +11,9 @@ public class WalletController {
     @FXML
     private ComboBox date;
     @FXML
-    private ComboboBox month;
+    private ComboBox month;
     @FXML
-    private ComboboBox year;
+    private ComboBox year;
     @FXML
     TextField detail;
     @FXML
@@ -27,7 +27,7 @@ public class WalletController {
         }
         if(year != null){
             //I cant remember the range of year we set LOL pls fix it if i'm wrong.
-            for(int i = 2018, i>= 2028, i++){
+            for(int i = 2018; i>= 2028; i++){
                 year.getItems().addAll(i);
             }
 
@@ -50,10 +50,10 @@ public class WalletController {
             listIncome.add(date,month,year,detail.getText(),amount.getText());
         }
         if(categories.equals("outcome")){
-            listIncome.add(date,month,year);
+            listIncome.add(date,month,year,detail.getText(),amount.getText());
         }
         if(categories.equals("Saving")){
-            listIncome.add(date,month,year);
+            listIncome.add(date,month,year,detail.getText(),amount.getText());
         }
     }
 
