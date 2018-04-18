@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.time.Month;
 import java.time.Year;
+import java.util.IllegalFormatException;
 
 public class WalletController {
     @FXML
@@ -53,6 +54,11 @@ public class WalletController {
             //return red border.
         }
         //input only number for amount
+        try{
+            Integer.parseInt(amount.getText());
+        }catch (IllegalFormatException e){
+            // return red border.
+        }
     }
 
     public void handleRecord(ActionEvent event) {
