@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-public class WalletController {
+public class WalletController{
     @FXML
     private ComboBox categories;
     @FXML
@@ -27,34 +27,34 @@ public class WalletController {
         }
         if(year != null){
             //I cant remember the range of year we set LOL pls fix it if i'm wrong.
-            for(int i = 2018; i>= 2028; i++){
-                year.getItems().addAll(i);
+            for(int i = 2018; i<= 2028; i++){
+                year.getItems().add(i);
             }
 
         }
         if(month != null){
-            //can we add items from arraylist?
-            date.getItems().addAll("January","Febuary","March","April","May","June","July","August","September","October","November","December");
+            month.getItems().addAll("January","Febuary","March","April","May","June","July","August","September","October","November","December");
             categories.getSelectionModel().select(0);
         }
         if(date != null){
-            //if year equals leap year (29 Feb) which is 2020, 2024, 2028.
-            //if month equals index of array (2,4,...) date will be 1-31. Else is 1-30.
+            for(int i = 1; i<= 31; i++){
+                date.getItems().add(i);
+            }
         }
     }
 
     public void handleRecord(ActionEvent event){
-        //recheck
-        // categories.getValue().equals?
-        if(categories.equals("income")){
-            listIncome.add(date,month,year,detail.getText(),amount.getText());
-        }
-        if(categories.equals("outcome")){
-            listIncome.add(date,month,year,detail.getText(),amount.getText());
-        }
-        if(categories.equals("Saving")){
-            listIncome.add(date,month,year,detail.getText(),amount.getText());
-        }
+//        //recheck
+//        // categories.getValue().equals?
+//        if(categories.equals("income")){
+//            listIncome.add(date,month,year,detail.getText(),amount.getText());
+//        }
+//        if(categories.equals("outcome")){
+//            listIncome.add(date,month,year,detail.getText(),amount.getText());
+//        }
+//        if(categories.equals("Saving")){
+//            listIncome.add(date,month,year,detail.getText(),amount.getText());
+//        }
     }
 
 }
