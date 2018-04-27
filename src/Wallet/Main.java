@@ -14,7 +14,11 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("WalletUI.fxml"));
         stage.setTitle("My Wallet");
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+
+        String css = this.getClass().getResource("Wallet\\src\\Wallet\\WalletStyle.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        stage.setScene(scene);
         stage.show();
     }
 
