@@ -31,7 +31,7 @@ public class WalletController {
         }
         if (year != null) {
             //I cant remember the range of year we set LOL pls fix it if i'm wrong.
-            for (int i = 2018; i <= 2028; i++) {
+            for(int i = 2017; i<= 2021; i++){
                 year.getItems().add(i);
             }
 

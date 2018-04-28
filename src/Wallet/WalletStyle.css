@@ -1,0 +1,15 @@
+
+.root {
+    -fx-background-color:linear-gradient(#FFFFFF, #e5fff6);
+
+}
+
+
+
+.button {
+    -fx-background-color: white;
+    -fx-border-color: skyblue;
+    -fx-font-size: 20;
+    -fx-font-style: grey;
+
+}
