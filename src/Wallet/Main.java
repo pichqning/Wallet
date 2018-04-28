@@ -15,13 +15,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("WalletUI.fxml"));
         stage.setTitle("My Wallet");
         Scene scene = new Scene(root);
-
-        String css = this.getClass().getResource("Wallet\\src\\Wallet\\WalletStyle.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        scene.getStylesheets().add("Wallet/WalletStyle.css");
         stage.setScene(scene);
         stage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
