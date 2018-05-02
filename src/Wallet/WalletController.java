@@ -10,7 +10,7 @@ import java.time.Month;
 import java.time.Year;
 import java.util.IllegalFormatException;
 
-public class WalletController extends jdbc{
+public class WalletController extends jdbc {
     @FXML
     private ComboBox categories;
     @FXML
@@ -24,7 +24,6 @@ public class WalletController extends jdbc{
     @FXML
     TextField amount;
 
-    private int id = 1;
     //private list of month.
     public void initialize() {
         if (categories != null) {
@@ -33,7 +32,7 @@ public class WalletController extends jdbc{
         }
         if (year != null) {
             //I cant remember the range of year we set LOL pls fix it if i'm wrong.
-            for(int i = 2017; i<= 2021; i++){
+            for (int i = 2017; i <= 2021; i++) {
                 year.getItems().add(i);
             }
             year.getSelectionModel().select(0);
@@ -54,28 +53,29 @@ public class WalletController extends jdbc{
     public void InvalidInput(ActionEvent event) {
         //check date unmatch with year (leap year for february) 2020 2024 2028
         //check date unmatch with month (30/31 days)
-        if(date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))){
+        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
             date.setStyle("-fx-border-color: red ;");
         }
         //input only number for amount
-        try{
+        try {
             Integer.parseInt(amount.getText());
-        }catch (IllegalFormatException e){
+        } catch (IllegalFormatException e) {
             amount.setStyle("-fx-border-color: red ;");
         }
     }
 
     public void handleRecord(ActionEvent event) {
         //recheck
-        if(categories.getSelectionModel().equals("Income")){
-            submitRecord("income",amount.getText(),detail.getText(),convertDate());
-        }
-        else if(categories.getSelectionModel().equals("Outcome")){
-            submitRecord("outcome",amount.getText(),detail.getText(),convertDate());
-            System.out.println("already recorded");
-        }
-        else if(categories.getSelectionModel().equals("Saving")){
-            submitRecord("saving",amount.getText(),detail.getText(),convertDate());
+        try {
+            if (categories.getSelectionModel().equals("Income")) {
+                submitRecord("income", amount.getText(), detail.getText(), convertDate());
+            } else if (categories.getSelectionModel().equals("Outcome")) {
+                submitRecord("outcome", amount.getText(), detail.getText(), convertDate());
+            } else if (categories.getSelectionModel().equals("Saving")) {
+                submitRecord("saving", amount.getText(), detail.getText(), convertDate());
+            }
+        } catch (Exception e) {
+            InvalidInput(event);
         }
 //        switch (categories.getSelectionModel().getSelectedItem().toString()){
 //            case "Income" :
@@ -85,11 +85,11 @@ public class WalletController extends jdbc{
     }
 
     //convert selected items to Localdate format.
-    public LocalDate convertDate(){
+    public LocalDate convertDate() {
         Object Year = year.getSelectionModel().getSelectedItem();
         Object Month = month.getSelectionModel().getSelectedItem().getValue();
         Object Date = date.getSelectionModel().getSelectedItem();
-        String yearmonthdate = String.format(Year+"-"+Month+"-"+Date);
+        String yearmonthdate = String.format(Year + "-" + Month + "-" + Date);
         LocalDate localDate = LocalDate.parse(yearmonthdate);
         return localDate;
     }
