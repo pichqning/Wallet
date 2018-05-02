@@ -1,5 +1,6 @@
 package Wallet;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -65,14 +66,19 @@ public class WalletController extends jdbc {
     }
 
     public void handleRecord(ActionEvent event) {
+        System.out.println("WTF");
+        LocalDate date = convertDate();
         //recheck
         try {
-            if (categories.getSelectionModel().equals("Income")) {
+            if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
+                System.out.println("Income");
                 submitRecord("income", amount.getText(), detail.getText(), convertDate());
             } else if (categories.getSelectionModel().equals("Outcome")) {
                 submitRecord("outcome", amount.getText(), detail.getText(), convertDate());
             } else if (categories.getSelectionModel().equals("Saving")) {
                 submitRecord("saving", amount.getText(), detail.getText(), convertDate());
+            } else {
+                System.out.println("Else");
             }
         } catch (Exception e) {
             InvalidInput(event);
@@ -81,16 +87,17 @@ public class WalletController extends jdbc {
 //            case "Income" :
 //                submitRecord("income",amount.getText(),detail.getText(),convertDate());
 //        }
-
+        Platform.exit();
     }
 
     //convert selected items to Localdate format.
     public LocalDate convertDate() {
-        Object Year = year.getSelectionModel().getSelectedItem();
-        Object Month = month.getSelectionModel().getSelectedItem().getValue();
-        Object Date = date.getSelectionModel().getSelectedItem();
-        String yearmonthdate = String.format(Year + "-" + Month + "-" + Date);
-        LocalDate localDate = LocalDate.parse(yearmonthdate);
+        int Year = year.getSelectionModel().getSelectedItem();
+        int Month = month.getSelectionModel().getSelectedItem().getValue();
+        int Date = date.getSelectionModel().getSelectedItem();
+        String yearmonthdate = Year + "-" + Month + "-" + Date;
+//        LocalDate localDate = LocalDate.parse(yearmonthdate);
+        LocalDate localDate = LocalDate.of(Year, Month, Date);
         return localDate;
     }
 }

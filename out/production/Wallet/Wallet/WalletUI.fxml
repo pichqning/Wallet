@@ -32,7 +32,7 @@
             <ComboBox fx:id="date" layoutX="30.0" layoutY="272.0" prefHeight="40.0" prefWidth="120.0" promptText="Date" />
             <ComboBox fx:id="month" layoutX="165.0" layoutY="272.0" prefHeight="40.0" prefWidth="170.0" promptText="Month" />
             <ComboBox fx:id="year" layoutX="350.0" layoutY="272.0" prefHeight="40.0" prefWidth="120.0" promptText="Year" />
-            <Button layoutX="125.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleRecord" onMouseClicked="#handleRecord" prefHeight="60.0" prefWidth="240.0" text="Submit" />
+            <Button layoutX="125.0" layoutY="472.0" mnemonicParsing="false" onAction="#handleRecord" prefHeight="60.0" prefWidth="240.0" text="Submit" />
          </children>
       </AnchorPane>
    </children>

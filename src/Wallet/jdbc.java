@@ -54,10 +54,11 @@ public class jdbc{
 
     public static void submitRecord(String tableName, Object ... values){
         openConnection();
+        System.out.println("open connection");
         Statement statement;
         try {
             statement = connection.createStatement();
-            String sql = "insert into " + tableName + " values(";
+            String sql = "insert into " + tableName + "(amount, detail, date) values(";
             sql += createInsertStatement(values);
             sql += ")";
             System.out.println(sql);
