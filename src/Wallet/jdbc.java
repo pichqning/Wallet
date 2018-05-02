@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 
-public class jdbc {
+public class jdbc{
     static final String userName = "Raksani";
     static final String passWord = "07102541b";
     // JDBC driver name and database URL
@@ -37,7 +37,7 @@ public class jdbc {
         }
     }
 
-    private static String createStatement(Object ... values){
+    private static String createInsertStatement(Object ... values){
         StringBuilder sql = new StringBuilder();
         for (Object value : values) {
             if (value.getClass().equals(String.class)) sql.append("\"").append(value).append("\"");
@@ -50,13 +50,15 @@ public class jdbc {
         return sql.toString();
     }
 
+    // TODO writing method for showing the table in monthly.
+
     public static void submitRecord(String tableName, Object ... values){
         openConnection();
         Statement statement;
         try {
             statement = connection.createStatement();
             String sql = "insert into " + tableName + " values(";
-            sql += createStatement(values);
+            sql += createInsertStatement(values);
             sql += ")";
             System.out.println(sql);
             statement.execute(sql);

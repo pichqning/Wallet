@@ -5,11 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.IllegalFormatException;
 
-public class WalletController {
+public class WalletController extends jdbc{
     @FXML
     private ComboBox categories;
     @FXML
@@ -23,6 +24,7 @@ public class WalletController {
     @FXML
     TextField amount;
 
+    private int id = 1;
     //private list of month.
     public void initialize() {
         if (categories != null) {
@@ -34,16 +36,18 @@ public class WalletController {
             for(int i = 2017; i<= 2021; i++){
                 year.getItems().add(i);
             }
+            year.getSelectionModel().select(0);
 
         }
         if (month != null) {
             month.getItems().addAll(Month.values());
-            categories.getSelectionModel().select(0);
+            month.getSelectionModel().select(0);
         }
         if (date != null) {
             for (int i = 1; i <= 31; i++) {
                 date.getItems().add(i);
             }
+            date.getSelectionModel().select(0);
         }
     }
 
@@ -51,28 +55,42 @@ public class WalletController {
         //check date unmatch with year (leap year for february) 2020 2024 2028
         //check date unmatch with month (30/31 days)
         if(date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))){
-            //return red border.
+            date.setStyle("-fx-border-color: red ;");
         }
         //input only number for amount
         try{
             Integer.parseInt(amount.getText());
         }catch (IllegalFormatException e){
-            // return red border.
+            amount.setStyle("-fx-border-color: red ;");
         }
     }
 
     public void handleRecord(ActionEvent event) {
         //recheck
-        // categories.getValue().equals?
-//        if (categories.equals("income")) {
-//            listIncome.add(date, month, year, detail.getText(), amount.getText());
+        if(categories.getSelectionModel().equals("Income")){
+            submitRecord("income",amount.getText(),detail.getText(),convertDate());
+        }
+        else if(categories.getSelectionModel().equals("Outcome")){
+            submitRecord("outcome",amount.getText(),detail.getText(),convertDate());
+            System.out.println("already recorded");
+        }
+        else if(categories.getSelectionModel().equals("Saving")){
+            submitRecord("saving",amount.getText(),detail.getText(),convertDate());
+        }
+//        switch (categories.getSelectionModel().getSelectedItem().toString()){
+//            case "Income" :
+//                submitRecord("income",amount.getText(),detail.getText(),convertDate());
 //        }
-//        if (categories.equals("outcome")) {
-//            listIncome.add(date, month, year, detail.getText(), amount.getText());
-//        }
-//        if (categories.equals("Saving")) {
-//            listIncome.add(date, month, year, detail.getText(), amount.getText());
-//        }
+
     }
 
+    //convert selected items to Localdate format.
+    public LocalDate convertDate(){
+        Object Year = year.getSelectionModel().getSelectedItem();
+        Object Month = month.getSelectionModel().getSelectedItem().getValue();
+        Object Date = date.getSelectionModel().getSelectedItem();
+        String yearmonthdate = String.format(Year+"-"+Month+"-"+Date);
+        LocalDate localDate = LocalDate.parse(yearmonthdate);
+        return localDate;
+    }
 }
