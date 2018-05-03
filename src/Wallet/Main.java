@@ -21,6 +21,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
+//        jdbc jdbc = new jdbc();
+//        System.out.println(jdbc.getTotalFromColumn("amount", "income"));
     }
 }
