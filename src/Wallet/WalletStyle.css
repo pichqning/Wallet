@@ -12,9 +12,9 @@
 
 }
 .button {
-    -fx-background-color: white;
-    -fx-border-color: white;
-    -fx-background-repeat: repeat;
+   // -fx-background-color: #fff3b2;
+    -fx-border-color: #fff3b2;
+    -fx-font-size: 20;
 
 }
 .menu-bar {
@@ -27,13 +27,13 @@
     -fx-background-color: #404040;
     -fx-border-color: #404040;
     -fx-color-label-visible: #404040;
-    -fx-prompt-text-fill: white;
-    -fx-text-color : grey;
+    -fx-text-style: grey;
 
 }
+
 .menu-item{
     -fx-background-color:#404040 ;
     -fx-border-color: #404040;
-    -fx-cell-size: 0;
+    -fx-text-style: #C9C9C9;
 
 }

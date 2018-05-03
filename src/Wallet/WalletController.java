@@ -3,7 +3,9 @@ package Wallet;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
@@ -24,6 +26,8 @@ public class WalletController extends jdbc {
     TextField detail;
     @FXML
     TextField amount;
+    @FXML
+    Button submit;
 
     //private list of month.
     public void initialize() {
@@ -99,5 +103,14 @@ public class WalletController extends jdbc {
 //        LocalDate localDate = LocalDate.parse(yearmonthdate);
         LocalDate localDate = LocalDate.of(Year, Month, Date);
         return localDate;
+    }
+
+    public void exit() {
+        System.exit(1);
+    }
+
+    public void pointColor (ActionEvent event){
+        submit.setStyle("-fx-background-color: rgba(234,255,226,0.83)");
+
     }
 }
