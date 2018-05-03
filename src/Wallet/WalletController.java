@@ -3,10 +3,7 @@ package Wallet;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -28,6 +25,12 @@ public class WalletController extends jdbc {
     TextField amount;
     @FXML
     Button submit;
+    @FXML
+    MenuItem daily;
+    @FXML
+    MenuItem monthly;
+    @FXML
+    Menu summary;
 
     //private list of month.
     public void initialize() {
@@ -109,8 +112,4 @@ public class WalletController extends jdbc {
         System.exit(1);
     }
 
-    public void pointColor (ActionEvent event){
-        submit.setStyle("-fx-background-color: rgba(234,255,226,0.83)");
-
-    }
 }
