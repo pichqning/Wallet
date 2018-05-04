@@ -2,6 +2,9 @@ package Wallet;
 
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -12,6 +15,7 @@ public class jdbc {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/wallet";
+    private ObservableList<Object> tableList;
 
     static Connection connection;
 
@@ -90,36 +94,33 @@ public class jdbc {
     public void loadDataFromDB() {
         try {
             openConnection();
-            //data = FXCollections.observableArrayList();
+            tableList = FXCollections.observableArrayList();
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM outcome");
             while (resultSet.next()) {
-//                SummaryTable summaryTable = new SummaryTable(resultSet.getInt("id"),
-//                        resultSet.getString("date"),
-//                        resultSet.getDouble("amount"),
-//                        resultSet.getString("detail"))
+                SummaryTable summaryTable = new SummaryTable(resultSet.getInt("id"),
+                        resultSet.getString("date"),resultSet.getString("detail"),
+                        resultSet.getDouble("amount"));
                 //get string from db,whichever way
-               // data.add(managerDetail);
+                tableList.add(summaryTable);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-//        id.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        from.setCellValueFactory(new PropertyValueFactory<>("depart"));
-//        to.setCellValueFactory(new PropertyValueFactory<>("arrive"));
-//        departinfo.setCellValueFactory(new PropertyValueFactory<>("departinfo"));
-//        arriveinfo.setCellValueFactory(new PropertyValueFactory<>("arriveinfo"));
-//        companyinfo.setCellValueFactory(new PropertyValueFactory<>("company"));
-//        cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
-//
-//        manage.setItems(null);
-//        manage.setItems(data);
+        // TODO change id,date,.. to fxml variable. เอาคอมเม้นออกด้วยค่ะ.
+//        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+//        detailCol.setCellValueFactory(new PropertyValueFactory<>("detail"));
+//        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        // TODO change TableView to your own Table view's name ka.
+//        TableView.setItems(null);
+//        TableView.setItems(tableList);
     }
 
 
     public static void submitRecord(String tableName, Object... values) {
         openConnection();
-        System.out.println("open connection");
+        System.out.println("open connection in submitRecord");
         Statement statement;
         try {
             statement = connection.createStatement();

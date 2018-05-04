@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,9 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.time.DateTimeException;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
@@ -83,28 +82,28 @@ public class WalletController extends jdbc {
         }
     }
 
-    public void InvalidInput(ActionEvent event) {
+    // TODO fix css.
+
+    public void InvalidInput() {
         //check date unmatch with year (leap year for february) 2020 2024 2028
         //check date unmatch with month (30/31 days)
-        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
-            date.setStyle("-fx-border-color: red ;");
-        }
+            if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
+                date.setStyle("-fx-border-color: #ff0000 ;");
+            }
         //input only number for amount
         try {
             Integer.parseInt(amount.getText());
         } catch (IllegalFormatException e) {
-            amount.setStyle("-fx-border-color: red ;");
+            amount.setStyle("-fx-border-color: #ff0000 ;");
         }
     }
 
     public void handleRecord(ActionEvent event) {
-        System.out.println("WTF");
-        LocalDate date = convertDate();
-        //recheck
         try {
+            System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
-                System.out.println("Income");
                 submitRecord("income", amount.getText(), detail.getText(), convertDate());
+                System.out.println("Submitting to income.");
             } else if (categories.getSelectionModel().equals("Outcome")) {
                 submitRecord("outcome", amount.getText(), detail.getText(), convertDate());
             } else if (categories.getSelectionModel().equals("Saving")) {
@@ -113,23 +112,23 @@ public class WalletController extends jdbc {
                 System.out.println("Else");
             }
         } catch (Exception e) {
-            InvalidInput(event);
+            System.out.println("Cannot Recording");
+            InvalidInput();
         }
-//        switch (categories.getSelectionModel().getSelectedItem().toString()){
-//            case "Income" :
-//                submitRecord("income",amount.getText(),detail.getText(),convertDate());
-//        }
         Platform.exit();
     }
 
     //convert selected items to Localdate format.
     public LocalDate convertDate() {
+        LocalDate localDate = null;
         int Year = year.getSelectionModel().getSelectedItem();
         int Month = month.getSelectionModel().getSelectedItem().getValue();
         int Date = date.getSelectionModel().getSelectedItem();
-        String yearmonthdate = Year + "-" + Month + "-" + Date;
-//        LocalDate localDate = LocalDate.parse(yearmonthdate);
-        LocalDate localDate = LocalDate.of(Year, Month, Date);
+        try{
+            localDate = LocalDate.of(Year, Month, Date);
+        } catch (DateTimeException e){
+            InvalidInput();
+        }
         return localDate;
     }
 
