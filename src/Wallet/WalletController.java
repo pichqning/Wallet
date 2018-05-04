@@ -85,21 +85,30 @@ public class WalletController extends jdbc {
     // TODO fix css.
 
     public void InvalidInput() {
+            if (detail.getText()==null || amount.getText()==null)  {
+                detail.getStyleClass().add("invalid");
+                amount.getStyleClass().add("invalid");
+            }
         //check date unmatch with year (leap year for february) 2020 2024 2028
         //check date unmatch with month (30/31 days)
             if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
-                date.setStyle("-fx-border-color: #ff0000 ;");
+                date.getStyleClass().add("invalid");
             }
         //input only number for amount
         try {
-            Integer.parseInt(amount.getText());
+                if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
         } catch (IllegalFormatException e) {
-            amount.setStyle("-fx-border-color: #ff0000 ;");
+            amount.getStyleClass().add("invalid");
         }
     }
 
     public void handleRecord(ActionEvent event) {
+        if (detail.getText().length()<0 || amount.getText().length() <0){
+            InvalidInput();
+        }
+
         try {
+
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
                 submitRecord("income", amount.getText(), detail.getText(), convertDate());
