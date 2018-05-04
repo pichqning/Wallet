@@ -18,8 +18,8 @@
    <children>
       <AnchorPane maxHeight="600.0" maxWidth="500.0" minHeight="600.0" minWidth="500.0" onContextMenuRequested="#initialize" prefHeight="600.0" prefWidth="500.0" GridPane.columnIndex="1">
          <children>
-            <Label id="back1" layoutY="400.0" prefHeight="399.0" prefWidth="728.0" rotate="-36.9" style="-fx-background-color: grey;" AnchorPane.topAnchor="303.0" />
-            <ImageView blendMode="MULTIPLY" fitHeight="492.0" fitWidth="834.0" layoutX="-167.0" layoutY="23.0" opacity="0.16" pickOnBounds="true" preserveRatio="true" rotate="-36.9">
+            <Label id="back1" layoutX="-56.0" layoutY="383.0" prefHeight="312.0" prefWidth="772.0" rotate="-36.9" style="-fx-background-color: grey;" AnchorPane.topAnchor="383.0" />
+            <ImageView blendMode="MULTIPLY" fitHeight="411.0" fitWidth="830.0" layoutX="-210.0" layoutY="-1.0" opacity="0.16" pickOnBounds="true" preserveRatio="true" rotate="-36.9">
                <image>
                   <Image url="@../image/banner.jpg" />
                </image>

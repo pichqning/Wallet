@@ -27,20 +27,19 @@
     -fx-background-radius: 10;
 }
 .menu-bar {
-    -fx-background-color: #404040;
+    -fx-background-color: #deaf33;
     -fx-text-color : grey;
-    -fx-text-fill: #404040;
+    -fx-text-fill: white;
 }
 .menu {
-    -fx-background-color: #404040;
-    -fx-border-color: #404040;
+    -fx-background-color: #deaf33;
+    -fx-border-color: #4deaf33;
     -fx-text-fill: white;
 }
 
 .menu-item:hover{
     -fx-border-color: white;
     -fx-border-radius: 10;
-
 }
 
 .summary.menu{
@@ -79,9 +78,13 @@
     -fx-prompt-text-fill: grey;
 }
 
+
+
 #date:selected {
     -fx-background-radius: 10;
     -fx-background-color: white;
     -fx-opacity: 60%;
 }
+
+
 
