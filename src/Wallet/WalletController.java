@@ -35,13 +35,11 @@ public class WalletController extends jdbc {
     @FXML
     Button submit;
     @FXML
-    MenuItem daily;
+    MenuItem status;
     @FXML
     MenuItem monthly;
     @FXML
     Menu summary;
-    @FXML
-    AnchorPane table;
     @FXML
     TableView tableView;
     @FXML
