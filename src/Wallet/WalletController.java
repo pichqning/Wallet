@@ -3,8 +3,18 @@ package Wallet;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
@@ -31,6 +41,21 @@ public class WalletController extends jdbc {
     MenuItem monthly;
     @FXML
     Menu summary;
+    @FXML
+    AnchorPane table;
+    @FXML
+    TableView tableView;
+    @FXML
+    TableColumn idColumn;
+    @FXML
+    TableColumn dateColumn;
+    @FXML
+    TableColumn detailColumn;
+    @FXML
+    TableColumn amountColumn;
+    @FXML
+    TableColumn typeColumn;
+
 
     //private list of month.
     public void initialize() {
@@ -112,4 +137,24 @@ public class WalletController extends jdbc {
         System.exit(1);
     }
 
-}
+    @FXML
+        public void openTable(ActionEvent event) {
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getResource("TableUI.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Summary");
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("Wallet/TableStyle.css");
+                stage.setScene(scene);
+                stage.show();
+                // Hide this current window (if this is what you want)
+                //((Node)(event.getSource())).getScene().getWindow().hide();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
