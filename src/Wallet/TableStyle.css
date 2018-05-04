@@ -1,0 +1,22 @@
+.root {
+    -fx-background-color: grey;
+}
+.tableView {
+    -fx-background-color: black;
+}
+#closebutt {
+    -fx-background-color: none;
+    -fx-border-color: white;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-text-fill: white;
+}
+
+#closebutt:hover {
+    -fx-background-color: white;
+    -fx-opacity: 50%;
+    -fx-background-radius: 10;
+    -fx-border-color: none;
+    -fx-text-fill: #404040;
+}
+

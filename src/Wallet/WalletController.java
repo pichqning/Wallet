@@ -54,6 +54,8 @@ public class WalletController extends jdbc {
     TableColumn amountColumn;
     @FXML
     TableColumn typeColumn;
+    @FXML
+    Button closebutt;
 
 
     //private list of month.
@@ -134,6 +136,11 @@ public class WalletController extends jdbc {
 
     public void exit() {
         System.exit(1);
+    }
+
+    @FXML
+    public void close(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
