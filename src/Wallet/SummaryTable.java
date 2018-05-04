@@ -4,13 +4,12 @@ import javafx.beans.property.*;
 
 
 public class SummaryTable {
-    public class ManagerDetail {
         private IntegerProperty id;
         private StringProperty date;
         private StringProperty detail;
         private DoubleProperty amount;
 
-        public ManagerDetail(int id, String date, String detail, double amount) {
+        public SummaryTable(int id, String date, String detail, double amount) {
             this.id = new SimpleIntegerProperty(id);
             this.date = new SimpleStringProperty(date);
             this.detail = new SimpleStringProperty(detail);
@@ -51,4 +50,3 @@ public class SummaryTable {
             return amount;
         }
     }
-}
