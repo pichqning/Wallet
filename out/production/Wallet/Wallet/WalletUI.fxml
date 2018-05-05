@@ -26,14 +26,10 @@
             </ImageView>
             <MenuBar accessibleText="Summary" layoutX="-15.0" prefHeight="30.0" prefWidth="515.0">
               <menus>
-                <Menu mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Summary">
+                <Menu fx:id="summary" mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Summary">
                   <items>
-<<<<<<< HEAD
                         <MenuItem id="monthly" fx:id="monthly" mnemonicParsing="false" onAction="#openTable" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Monthly" />
-=======
-                        <MenuItem id="daily" fx:id="daily" mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Daily" />
-                        <MenuItem id="monthly" fx:id="monthly" mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Monthly" />
->>>>>>> origin/master
+                        <MenuItem id="monthly" fx:id="status" mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Status" />
                     <MenuItem mnemonicParsing="false" onAction="#exit" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Exit" />
                   </items>
                 </Menu>
