@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
@@ -54,7 +56,14 @@ public class WalletController extends jdbc {
     TableColumn typeColumn;
     @FXML
     Button closebutt;
-
+    @FXML
+    Button backbutt;
+    @FXML
+    LineChart lineChart;
+    @FXML
+    Button showChart;
+    @FXML
+    Axis axis;
 
     //private list of month.
     public void initialize() {
@@ -150,6 +159,7 @@ public class WalletController extends jdbc {
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
+
     @FXML
         public void openTable(ActionEvent event) {
             Parent root;
@@ -167,6 +177,26 @@ public class WalletController extends jdbc {
             catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        @FXML
+    public void openGraph(ActionEvent event) {
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getResource("GraphUI.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Expenses Graph");
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add("Wallet/GraphStyle.css");
+                stage.setScene(scene);
+                stage.show();
+                // Hide this current window (if this is what you want)
+               // ((Node)(event.getSource())).getScene().getWindow().hide();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
