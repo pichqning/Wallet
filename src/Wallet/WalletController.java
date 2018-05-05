@@ -39,21 +39,19 @@ public class WalletController extends jdbc {
     @FXML
     MenuItem monthly;
     @FXML
-    Menu summary;
-    @FXML
     AnchorPane table;
     @FXML
-    TableView tableView;
+    static TableView tableView;
     @FXML
-    TableColumn idColumn;
+    static TableColumn idColumn;
     @FXML
-    TableColumn dateColumn;
+    static TableColumn dateColumn;
     @FXML
-    TableColumn detailColumn;
+    static TableColumn detailColumn;
     @FXML
-    TableColumn amountColumn;
+    static TableColumn amountColumn;
     @FXML
-    TableColumn typeColumn;
+    static TableColumn typeColumn;
 
 
     //private list of month.
