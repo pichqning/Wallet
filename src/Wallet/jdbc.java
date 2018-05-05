@@ -3,11 +3,15 @@ package Wallet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.sql.*;
 import java.time.LocalDate;
+
+import static Wallet.WalletController.*;
 
 public class jdbc {
     static final String userName = "Raksani";
@@ -107,14 +111,15 @@ public class jdbc {
             e.printStackTrace();
         }
 
-        // TODO change id,date,.. to fxml variable. เอาคอมเม้นออกด้วยค่ะ.
-//        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-//        detailCol.setCellValueFactory(new PropertyValueFactory<>("detail"));
-//        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        // TODO change TableView to your own Table view's name ka.
-//        TableView.setItems(null);
-//        TableView.setItems(tableList);
+
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        detailColumn.setCellValueFactory(new PropertyValueFactory<>("detail"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+        tableView.setItems(null);
+        tableView.setItems(tableList);
     }
 
 
