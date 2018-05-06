@@ -29,7 +29,7 @@
                 <Menu fx:id="summary" mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Summary">
                   <items>
                         <MenuItem id="monthly" fx:id="monthly" mnemonicParsing="false" onAction="#openTable" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Monthly" />
-                        <MenuItem id="monthly" fx:id="status" mnemonicParsing="false" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Status" />
+                        <MenuItem id="monthly" fx:id="status" mnemonicParsing="false" onAction="#openStatus" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Status" />
                     <MenuItem mnemonicParsing="false" onAction="#exit" style="-fx-text-fill: white;" styleClass="WalletStyle" text="Exit" />
                   </items>
                 </Menu>

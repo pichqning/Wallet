@@ -63,9 +63,19 @@ public class WalletController extends jdbc {
     @FXML
     Button showChart;
     @FXML
-    Axis axis;
+    Axis yaxis;
+    @FXML
+    Axis xaxis;
     @FXML
     Label warning;
+    @FXML
+    TextField incomeBox;
+    @FXML
+    TextField outcomeBox;
+    @FXML
+    TextField savingBox;
+    @FXML
+    TextField balanceBox;
 
     //private list of month.
     public void initialize() {
@@ -201,6 +211,24 @@ public class WalletController extends jdbc {
         }
 
     }
+
+    @FXML
+    public void openStatus(ActionEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("StatusUI.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Status");
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("Wallet/StatusStyle.css");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e ) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 
