@@ -1,0 +1,98 @@
+
+.root {
+    -fx-position-shape: fixed;
+    -fx-fill-width: 50%;
+    -fx-fill-height: 100%;
+    -fx-background-color:#00a7aa;
+
+}
+.back1{
+    -fx-background-color: #404040;
+    -fx-background-position: 75% 25%;
+
+}
+#submit {
+    -fx-background-color: none;
+    -fx-border-color: #ffffff;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -fx-border-radius: 10;
+
+}
+
+#submit:hover{
+    -fx-background-color: white;
+    -fx-text-fill: #404040;
+    -fx-border-color: none;
+    -fx-background-radius: 10;
+}
+.menu-bar {
+    -fx-background-color: #deaf33;
+    -fx-text-color : grey;
+    -fx-text-fill: white;
+}
+.menu {
+    -fx-background-color: #deaf33;
+    -fx-border-color: #deaf33;
+    -fx-text-fill: white;
+}
+
+.menu-item:hover{
+    -fx-border-color: white;
+    -fx-border-radius: 10;
+}
+
+.summary.menu{
+    -fx-prompt-text-fill: white;
+}
+.menu-item{
+    -fx-background-color:#404040 ;
+    -fx-border-color: #404040;
+    -fx-text-style: #C9C9C9;
+
+}
+.summary .menu {
+    -fx-text-fill: white;
+}
+.combo-box-base {
+    -fx-background-color: none;
+    -fx-border-color: #404040;
+    -fx-border-radius: 10 ;
+
+}
+
+.combo-box-base:hover {
+    -fx-background-color: white;
+    -fx-border-color: #8bffe2;
+    -fx-opacity: 60%;
+    -fx-text-fill: #000;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.text-field{
+    -fx-background-color: white;
+    -fx-border-color: none;
+    -fx-background-radius: 10;
+    -fx-opacity: 80%;
+    -fx-prompt-text-fill: grey;
+}
+
+
+
+#date:selected {
+    -fx-background-radius: 10;
+    -fx-background-color: white;
+    -fx-opacity: 60%;
+}
+
+#warning:filled {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-text-fill: #404040;
+    -fx-border-color: none;
+    -fx-border-radius: 10;
+    -fx-font-size: 16pt;
+}
+
+

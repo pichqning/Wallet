@@ -1,6 +1,8 @@
 package Wallet;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +12,14 @@ import javafx.scene.Scene;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.DateTimeException;
 
 import java.time.LocalDate;
@@ -43,17 +49,17 @@ public class WalletController extends jdbc {
     @FXML
     Menu summary;
     @FXML
-    static TableView tableView;
+    TableView<SummaryTable> tableView;
     @FXML
-    static TableColumn idColumn;
+    TableColumn<SummaryTable,Integer> idColumn;
     @FXML
-    static TableColumn dateColumn;
+    TableColumn<SummaryTable,String> dateColumn;
+//    @FXML
+//    TableColumn<SummaryTable,Integer> typeColumn;
     @FXML
-    static TableColumn detailColumn;
+    TableColumn<SummaryTable,String> detailColumn;
     @FXML
-    static TableColumn amountColumn;
-    @FXML
-    TableColumn typeColumn;
+    TableColumn<SummaryTable,Double> amountColumn;
     @FXML
     Button closeButton;
     @FXML
@@ -116,7 +122,7 @@ public class WalletController extends jdbc {
     }
 
     public void handleRecord(ActionEvent event) {
-        if (detail==null|| amount==null){
+        if (detail == null || amount == null) {
             InvalidInput();
         }
         try {
@@ -200,6 +206,36 @@ public class WalletController extends jdbc {
             e.printStackTrace();
         }
 
+    }
+
+    public void loadDataFromDB() {
+        ObservableList<SummaryTable> tableList = null;
+        try {
+            openConnection();
+            tableList = FXCollections.observableArrayList();
+            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM outcome");
+            while (resultSet.next()) {
+                // add type(table's name)
+                SummaryTable summaryTable = new SummaryTable(resultSet.getInt("id"),
+                        resultSet.getString("date"), resultSet.getDouble("amount"), resultSet.getString("detail"));
+                //get string from db,whichever way
+                tableList.add(summaryTable);
+                System.out.println(tableList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        System.out.println("set cell");
+        //typeColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        detailColumn.setCellValueFactory(new PropertyValueFactory<>("detail"));
+
+        //tableView.setItems(null);
+        tableView.setItems(tableList);
     }
 }
 

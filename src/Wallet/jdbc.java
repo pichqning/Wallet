@@ -23,7 +23,7 @@ public class jdbc {
 
     static Connection connection;
 
-    private static void openConnection() {
+    public static void openConnection() {
 
         try {
             Class.forName(JDBC_DRIVER);
@@ -33,7 +33,7 @@ public class jdbc {
         }
     }
 
-    private static void closeConnection() {
+    public static void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();
@@ -94,34 +94,8 @@ public class jdbc {
 //
 //    }
 
-    //method for showing the summary table.
+    //method for showing the outcome table.
 
-    public static void loadDataFromDB() {
-        try {
-            openConnection();
-            tableList = FXCollections.observableArrayList();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM outcome");
-            while (resultSet.next()) {
-                SummaryTable summaryTable = new SummaryTable(resultSet.getInt("id"),
-                        resultSet.getString("date"),resultSet.getString("detail"),
-                        resultSet.getDouble("amount"));
-                //get string from db,whichever way
-                tableList.add(summaryTable);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        detailColumn.setCellValueFactory(new PropertyValueFactory<>("detail"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-
-        tableView.setItems(null);
-        tableView.setItems(tableList);
-    }
 
 
     public static void submitRecord(String tableName, Object... values) {
