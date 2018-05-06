@@ -64,6 +64,8 @@ public class WalletController extends jdbc {
     Button showChart;
     @FXML
     Axis axis;
+    @FXML
+    Label warning;
 
     //private list of month.
     public void initialize() {
@@ -94,31 +96,31 @@ public class WalletController extends jdbc {
     // TODO fix css.
 
     public void InvalidInput() {
-            if (detail.getText()==null || amount.getText()==null)  {
-                detail.getStyleClass().add("invalid");
-                amount.getStyleClass().add("invalid");
-            }
+
+        warning.setText("Invalid input.");
+        System.out.println("invalid input");
+//        if (detail.getText()==null || amount.getText()==null)  {
+//               warning.setText("Please input detail and amount.");
+//            }
         //check date unmatch with year (leap year for february) 2020 2024 2028
         //check date unmatch with month (30/31 days)
-            if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
-                date.getStyleClass().add("invalid");
-            }
+//        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
+//               warning.setText("Invalid date.");
+//            }
         //input only number for amount
         try {
-                if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
+            if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
         } catch (IllegalFormatException e) {
-            amount.getStyleClass().add("invalid");
+            warning.setText("Cannot record the data.");
         }
     }
 
     public void handleRecord(ActionEvent event) {
-        if (detail.getText().length()<0 || amount.getText().length() <0){
+        if (detail==null|| amount==null){
             InvalidInput();
         }
-
         try {
-
-            System.out.println("Recording...");
+                System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
                 submitRecord("income", amount.getText(), detail.getText(), convertDate());
                 System.out.println("Submitting to income.");
@@ -133,7 +135,7 @@ public class WalletController extends jdbc {
             System.out.println("Cannot Recording");
             InvalidInput();
         }
-        Platform.exit();
+        //Platform.exit();
     }
 
     //convert selected items to Localdate format.
