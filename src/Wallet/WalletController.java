@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.time.DateTimeException;
 
@@ -55,9 +56,9 @@ public class WalletController extends jdbc {
     @FXML
     TableColumn typeColumn;
     @FXML
-    Button closebutt;
+    Button closeButton;
     @FXML
-    Button backbutt;
+    Button backButton;
     @FXML
     LineChart lineChart;
     @FXML
@@ -94,38 +95,39 @@ public class WalletController extends jdbc {
     // TODO fix css.
 
     public void InvalidInput() {
-            if (detail.getText()==null || amount.getText()==null)  {
-                detail.getStyleClass().add("invalid");
-                amount.getStyleClass().add("invalid");
-            }
+        if (detail.getText() == null || amount.getText() == null) {
+            detail.getStyleClass().add("invalid");
+            amount.getStyleClass().add("invalid");
+        }
         //check date unmatch with year (leap year for february) 2020 2024 2028
         //check date unmatch with month (30/31 days)
-            if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
-                date.getStyleClass().add("invalid");
-            }
+        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
+            date.getStyleClass().add("invalid");
+        }
         //input only number for amount
         try {
-                if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
+            if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
         } catch (IllegalFormatException e) {
             amount.getStyleClass().add("invalid");
         }
     }
 
     public void handleRecord(ActionEvent event) {
-        if (detail.getText().length()<0 || amount.getText().length() <0){
-            InvalidInput();
-        }
+//        if (detail.getText().length() < 0 || amount.getText().length() < 0) {
+//            InvalidInput();
+//        }
 
         try {
-
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
                 submitRecord("income", amount.getText(), detail.getText(), convertDate());
                 System.out.println("Submitting to income.");
-            } else if (categories.getSelectionModel().equals("Outcome")) {
+            } else if (categories.getSelectionModel().getSelectedItem().equals("Outcome")) {
                 submitRecord("outcome", amount.getText(), detail.getText(), convertDate());
-            } else if (categories.getSelectionModel().equals("Saving")) {
+                System.out.println("Submitting to outcome.");
+            } else if (categories.getSelectionModel().getSelectedItem().equals("Saving")) {
                 submitRecord("saving", amount.getText(), detail.getText(), convertDate());
+                System.out.println("Submitting to savings.");
             } else {
                 System.out.println("Else");
             }
@@ -142,9 +144,9 @@ public class WalletController extends jdbc {
         int Year = year.getSelectionModel().getSelectedItem();
         int Month = month.getSelectionModel().getSelectedItem().getValue();
         int Date = date.getSelectionModel().getSelectedItem();
-        try{
+        try {
             localDate = LocalDate.of(Year, Month, Date);
-        } catch (DateTimeException e){
+        } catch (DateTimeException e) {
             InvalidInput();
         }
         return localDate;
@@ -156,48 +158,47 @@ public class WalletController extends jdbc {
 
     @FXML
     public void close(ActionEvent event) {
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
 
     @FXML
-        public void openTable(ActionEvent event) {
-            Parent root;
-            try {
-                root = FXMLLoader.load(getClass().getResource("TableUI.fxml"));
-                Stage stage = new Stage();
-                stage.setTitle("Summary");
-                Scene scene = new Scene(root);
-                scene.getStylesheets().add("Wallet/TableStyle.css");
-                stage.setScene(scene);
-                stage.show();
-                // Hide this current window (if this is what you want)
-                //((Node)(event.getSource())).getScene().getWindow().hide();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void openTable(ActionEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("TableUI.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Summary");
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("Wallet/TableStyle.css");
+            stage.setScene(scene);
+            stage.show();
+            // Hide this current window (if this is what you want)
+            //((Node)(event.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        @FXML
-    public void openGraph(ActionEvent event) {
-            Parent root;
-            try {
-                root = FXMLLoader.load(getClass().getResource("GraphUI.fxml"));
-                Stage stage = new Stage();
-                stage.setTitle("Expenses Graph");
-                Scene scene = new Scene(root);
-                scene.getStylesheets().add("Wallet/GraphStyle.css");
-                stage.setScene(scene);
-                stage.show();
-                // Hide this current window (if this is what you want)
-               // ((Node)(event.getSource())).getScene().getWindow().hide();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
+        loadDataFromDB();
     }
+
+    @FXML
+    public void openGraph(ActionEvent event) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(getClass().getResource("GraphUI.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Expenses Graph");
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add("Wallet/GraphStyle.css");
+            stage.setScene(scene);
+            stage.show();
+            // Hide this current window (if this is what you want)
+            // ((Node)(event.getSource())).getScene().getWindow().hide();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
 
 
