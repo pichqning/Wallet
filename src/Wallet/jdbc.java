@@ -19,7 +19,7 @@ public class jdbc {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/wallet";
-    private ObservableList<Object> tableList;
+    private static ObservableList<Object> tableList;
 
     static Connection connection;
 
@@ -56,6 +56,7 @@ public class jdbc {
         return sql.toString();
     }
 
+    //method get total amount from income or outcome or savings.
     public double getTotalFromColumn(String columnName, String tableName) {
         openConnection();
         System.out.println("open connection");
@@ -72,30 +73,30 @@ public class jdbc {
         return result;
     }
 
-    //show the outcome table.
-    public String getOutcomeTableBetweenDate(){
-        openConnection();
-        System.out.println("open connection");
-        ResultSet outcome = null;
-        String outCome = null;
+//    //show the outcome table.
+//    public String getOutcomeTableBetweenDate(){
+//        openConnection();
+//        System.out.println("open connection");
+//        ResultSet outcome = null;
+//        String outCome = null;
+//
+//        try {
+//            outcome = connection.createStatement().executeQuery("select * from outcome");
+//            while (outcome.next()) {
+//                outCome += outcome.getString("outcome");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            closeConnection();
+//        }
+//        return outCome;
+//
+//    }
 
-        try {
-            outcome = connection.createStatement().executeQuery("select * from outcome");
-            while (outcome.next()) {
-                outCome += outcome.getString("outcome");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-        return outCome;
+    //method for showing the summary table.
 
-    }
-
-    // TODO writing method for showing the outcome table in monthly and convert it as a graph.
-
-    public void loadDataFromDB() {
+    public static void loadDataFromDB() {
         try {
             openConnection();
             tableList = FXCollections.observableArrayList();
