@@ -42,7 +42,7 @@
             <ComboBox fx:id="month" layoutX="165.0" layoutY="272.0" prefHeight="40.0" prefWidth="170.0" promptText="Month" />
             <ComboBox fx:id="year" layoutX="350.0" layoutY="272.0" prefHeight="40.0" prefWidth="120.0" promptText="Year" />
             <Button fx:id="submit" blendMode="LIGHTEN" layoutX="125.0" layoutY="472.0" onAction="#handleRecord" prefHeight="60.0" prefWidth="240.0" text="Submit" />
-            <Label id="warning" fx:id="warning" layoutX="49.0" layoutY="403.0" prefHeight="40.0" prefWidth="393.0" style="-fx-background-color: white; -fx-text-fill: #404040; -fx-opacity: 60%;" styleClass="WalletStyle" textAlignment="CENTER" />
+            <Label id="warning" fx:id="warning" alignment="CENTER" layoutX="49.0" layoutY="403.0" prefHeight="40.0" prefWidth="393.0" style="-fx-background-color: white; -fx-text-fill: #404040; -fx-opacity: 60%;" styleClass="WalletStyle" />
          </children>
       </AnchorPane>
    </children>
