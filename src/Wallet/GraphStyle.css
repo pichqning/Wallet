@@ -37,6 +37,7 @@
     -fx-stroke: #404040;
 }
 .chart-horizontal-grid-lines {
+    -fx-text-fill: #404040;
     -fx-stroke: #404040;
 }
 .chart-alternative-row-fill {
@@ -46,7 +47,7 @@
 }
 
 
-#backbutt {
+#backButton{
     -fx-background-color: none;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 14pt;
@@ -56,7 +57,7 @@
     -fx-border-radius: 10;
 }
 
-#backbutt:hover{
+#backButton:hover{
     -fx-background-radius: 10;
     -fx-background-color: white;
     -fx-opacity: 50%;
