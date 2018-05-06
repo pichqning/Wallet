@@ -1,3 +1,18 @@
 .root {
+    -fx-background-color: #00a7aa;
+}
 
+.text-area{
+    -fx-background-color: white;
+    -fx-opacity: 70%;
+    -fx-text-fill: #404040;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: white;
+}
+
+.label {
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #404040;
+    -fx-font-size: 16pt;
 }

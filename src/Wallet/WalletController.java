@@ -75,13 +75,13 @@ public class WalletController extends jdbc {
     @FXML
     Label warning;
     @FXML
-    TextField incomeBox;
+    TextArea incomeBox;
     @FXML
-    TextField outcomeBox;
+    TextArea outcomeBox;
     @FXML
-    TextField savingBox;
+    TextArea savingBox;
     @FXML
-    TextField balanceBox;
+    TextArea balanceBox;
 
     //private list of month.
     public void initialize() {
