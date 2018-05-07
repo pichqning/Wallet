@@ -149,6 +149,7 @@ public class WalletController extends jdbc {
             } else {
                 System.out.println("Else");
             }
+            warning.setText("");
         } catch (Exception e) {
             System.out.println("Cannot Recording");
             InvalidInput();
