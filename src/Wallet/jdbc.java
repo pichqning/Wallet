@@ -1,7 +1,5 @@
 package Wallet;
 
-
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -19,7 +17,6 @@ public class jdbc {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/wallet";
-    private static ObservableList<Object> tableList;
 
     static Connection connection;
 
@@ -56,47 +53,6 @@ public class jdbc {
         return sql.toString();
     }
 
-    //method get total amount from income or outcome or savings.
-    public double getTotalFromColumn(String columnName, String tableName) {
-        openConnection();
-        System.out.println("open connection");
-        ResultSet total = null;
-        double result = 0;
-        try {
-            total = connection.createStatement().executeQuery("select " + columnName + " from " + tableName);
-            if (total.next()) result += Double.parseDouble(total.getString(columnName));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-        return result;
-    }
-
-//    //show the outcome table.
-//    public String getOutcomeTableBetweenDate(){
-//        openConnection();
-//        System.out.println("open connection");
-//        ResultSet outcome = null;
-//        String outCome = null;
-//
-//        try {
-//            outcome = connection.createStatement().executeQuery("select * from outcome");
-//            while (outcome.next()) {
-//                outCome += outcome.getString("outcome");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            closeConnection();
-//        }
-//        return outCome;
-//
-//    }
-
-    //method for showing the outcome table.
-
-
 
     public static void submitRecord(String tableName, Object... values) {
         openConnection();
@@ -104,7 +60,7 @@ public class jdbc {
         Statement statement;
         try {
             statement = connection.createStatement();
-            String sql = "insert into " + tableName + "(amount, detail, date) values(";
+            String sql = "insert into " + tableName + "(amount, detail, date, type) values(";
             sql += createInsertStatement(values);
             sql += ")";
             System.out.println(sql);

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.DateTimeException;
@@ -26,6 +28,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.IllegalFormatException;
+import java.util.ResourceBundle;
+
+
 
 public class WalletController extends jdbc {
     @FXML
@@ -49,39 +54,15 @@ public class WalletController extends jdbc {
     @FXML
     Menu summary;
     @FXML
-    TableView<SummaryTable> tableView;
-    @FXML
-    TableColumn<SummaryTable,Integer> idColumn;
-    @FXML
-    TableColumn<SummaryTable,String> dateColumn;
-//    @FXML
-//    TableColumn<SummaryTable,Integer> typeColumn;
-    @FXML
-    TableColumn<SummaryTable,String> detailColumn;
-    @FXML
-    TableColumn<SummaryTable,Double> amountColumn;
-    @FXML
-    Button closeButton;
-    @FXML
     Button backButton;
     @FXML
     LineChart lineChart;
-    @FXML
-    Button showChart;
     @FXML
     Axis yaxis;
     @FXML
     Axis xaxis;
     @FXML
     Label warning;
-    @FXML
-    TextArea incomeBox;
-    @FXML
-    TextArea outcomeBox;
-    @FXML
-    TextArea savingBox;
-    @FXML
-    TextArea balanceBox;
 
     //private list of month.
     public void initialize() {
@@ -138,23 +119,25 @@ public class WalletController extends jdbc {
         try {
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
-                submitRecord("income", amount.getText(), detail.getText(), convertDate());
+                submitRecord("income", amount.getText(), detail.getText(), convertDate(), "income");
                 System.out.println("Submitting to income.");
             } else if (categories.getSelectionModel().getSelectedItem().equals("Outcome")) {
-                submitRecord("outcome", amount.getText(), detail.getText(), convertDate());
+                submitRecord("outcome", amount.getText(), detail.getText(), convertDate(),"outcome");
                 System.out.println("Submitting to outcome.");
             } else if (categories.getSelectionModel().getSelectedItem().equals("Saving")) {
-                submitRecord("saving", amount.getText(), detail.getText(), convertDate());
+                submitRecord("saving", amount.getText(), detail.getText(), convertDate(),"saving");
                 System.out.println("Submitting to savings.");
             } else {
                 System.out.println("Else");
             }
             warning.setText("");
+            openStatus(event);
         } catch (Exception e) {
             System.out.println("Cannot Recording");
             InvalidInput();
         }
-        //Platform.exit();
+        // TODO after clicking the submit button all of the text field must be set as a default.
+        // TODO after clicking the submit button, the status window must be opened automatically.
     }
 
     //convert selected items to Localdate format.
@@ -197,57 +180,9 @@ public class WalletController extends jdbc {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        loadDataFromDB();
     }
 
-    @FXML
-    public void openGraph(ActionEvent event) {
-        Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("GraphUI.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("Expenses Graph");
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add("Wallet/GraphStyle.css");
-            stage.setScene(scene);
-            stage.show();
-            // Hide this current window (if this is what you want)
-            // ((Node)(event.getSource())).getScene().getWindow().hide();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-    }
-
-    public void loadDataFromDB() {
-        ObservableList<SummaryTable> tableList = null;
-        try {
-            openConnection();
-            tableList = FXCollections.observableArrayList();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM outcome");
-            while (resultSet.next()) {
-                // add type(table's name)
-                SummaryTable summaryTable = new SummaryTable(resultSet.getInt("id"),
-                        resultSet.getString("date"), resultSet.getDouble("amount"), resultSet.getString("detail"));
-                //get string from db,whichever way
-                tableList.add(summaryTable);
-                System.out.println(tableList);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        System.out.println("set cell");
-        //typeColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        detailColumn.setCellValueFactory(new PropertyValueFactory<>("detail"));
-
-        //tableView.setItems(null);
-        tableView.setItems(tableList);
-    }
 
     @FXML
     public void openStatus(ActionEvent event) {
@@ -265,7 +200,6 @@ public class WalletController extends jdbc {
             e.printStackTrace();
         }
     }
-
 }
 
 

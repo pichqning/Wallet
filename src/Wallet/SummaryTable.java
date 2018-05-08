@@ -1,62 +1,39 @@
 package Wallet;
 
-import javafx.beans.property.*;
-
 
 public class SummaryTable {
-    private IntegerProperty id;
-    private StringProperty date;
-    //private StringProperty type;
-    private StringProperty detail;
-    private DoubleProperty amount;
+    private int id;
+    private String date;
+    private String detail;
+    private double amount;
+    private String type;
 
-    public SummaryTable(int id, String date, double amount, String detail) {
-        this.id = new SimpleIntegerProperty(id);
-        this.date = new SimpleStringProperty(date);
-        //this.type = new SimpleStringProperty(type);
-        this.detail = new SimpleStringProperty(detail);
-        this.amount = new SimpleDoubleProperty(amount);
+    public SummaryTable(int id, String date, double amount, String detail,String type) {
+        this.id = id;
+        this.date = date;
+        this.detail = detail;
+        this.amount = amount;
+        this.type = type;
 
     }
-
 
     public int getId() {
-        return id.get();
-    }
-
-    public IntegerProperty idProperty() {
         return id;
     }
 
     public String getDate() {
-        return date.get();
-    }
-
-    public StringProperty dateProperty() {
         return date;
     }
 
-//    public String getType() {
-//        return date.get();
-//    }
-//
-//    public StringProperty typeProperty() {
-//        return date;
-//    }
-
     public String getDetail() {
-        return detail.get();
-    }
-
-    public StringProperty detailProperty() {
         return detail;
     }
 
     public double getAmount() {
-        return amount.get();
+        return amount;
     }
 
-    public DoubleProperty amountProperty() {
-        return amount;
+    public String getType() {
+        return type;
     }
 }
