@@ -11,12 +11,12 @@
       <ImageView fitHeight="262.0" fitWidth="326.0" layoutX="130.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
       <TextArea fx:id="incomeBox" editable="false" layoutX="57.0" layoutY="28.0" prefHeight="100.0" prefWidth="200.0" text="0.0">
          <font>
-            <Font size="44.0" />
+            <Font size="28.0" />
          </font>
       </TextArea>
       <TextArea fx:id="balanceBox" editable="false" layoutX="314.0" layoutY="171.0" prefHeight="100.0" prefWidth="200.0" text="0.0">
          <font>
-            <Font size="44.0" />
+            <Font size="28.0" />
          </font>
       </TextArea>
       <TextArea fx:id="outcomeBox" editable="false" layoutX="314.0" layoutY="25.0" prefHeight="100.0" prefWidth="200.0" text="0.0">
@@ -26,7 +26,7 @@
       </TextArea>
       <TextArea fx:id="savingBox" editable="false" layoutX="57.0" layoutY="171.0" prefHeight="100.0" prefWidth="200.0" text="0.0">
          <font>
-            <Font size="44.0" />
+            <Font size="28.0" />
          </font>
       </TextArea>
       <Label layoutX="73.0" layoutY="131.0" prefHeight="21.0" prefWidth="97.0" text="Income" />

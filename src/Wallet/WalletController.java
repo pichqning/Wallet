@@ -90,8 +90,6 @@ public class WalletController extends jdbc {
         }
     }
 
-    // TODO fix css.
-
     public void InvalidInput() {
 
         warning.setText("Invalid input.");
@@ -111,12 +109,17 @@ public class WalletController extends jdbc {
             warning.setText("Cannot record the data.");
         }
     }
+    public void setAllDefault() {
+        warning.setText("");
+        detail.setText("");
+        amount.setText("");
+    }
 
     public void handleRecord(ActionEvent event) {
-        if (detail == null || amount == null) {
-            InvalidInput();
-        }
         try {
+            if (detail == null || amount.getText() == null) {
+                InvalidInput();
+            }
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
                 submitRecord("income", amount.getText(), detail.getText(), convertDate(), "income");
@@ -130,14 +133,13 @@ public class WalletController extends jdbc {
             } else {
                 System.out.println("Else");
             }
-            warning.setText("");
             openStatus(event);
+            setAllDefault();
         } catch (Exception e) {
             System.out.println("Cannot Recording");
             InvalidInput();
         }
-        // TODO after clicking the submit button all of the text field must be set as a default.
-        // TODO after clicking the submit button, the status window must be opened automatically.
+
     }
 
     //convert selected items to Localdate format.
