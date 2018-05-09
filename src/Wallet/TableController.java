@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -46,25 +47,12 @@ public class TableController implements Initializable {
     Button closeButton;
     @FXML
     Button showChart;
-    @FXML
-    LineChart lineChart;
-    @FXML
-    NumberAxis yaxis;
-    @FXML
-    CategoryAxis xaxis;
 
-    ObservableList<SummaryTable> tableList;
-    List<String> dateList;
-    List<Double> outcomeList;
-    ObservableList datalist;
-
-    private SummaryTable outcomeSummaryTable;
-
+    public static List<String> dateList = new ArrayList<>();
+    public static ObservableList datalist = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        datalist = FXCollections.observableArrayList();
-        tableList = FXCollections.observableArrayList();
         loadDataFromDB();
     }
 
@@ -76,12 +64,15 @@ public class TableController implements Initializable {
 
     @FXML
     public void loadDataFromDB() {
+        ObservableList<SummaryTable> tableList = null;
         try {
+            tableList = FXCollections.observableArrayList();
             openConnection();
             //select * from where date like... is... in case of insert specific month and year. (optional)
             ResultSet incomeResultSet = connection.createStatement().executeQuery("SELECT * FROM income");
             ResultSet outcomeResultSet = connection.createStatement().executeQuery("SELECT * FROM outcome");
             ResultSet savingResultSet = connection.createStatement().executeQuery("SELECT * FROM saving");
+
             while (incomeResultSet.next()) {
                 SummaryTable incomeSummaryTable = new SummaryTable(incomeResultSet.getInt("id"),
                         incomeResultSet.getString("date"), incomeResultSet.getDouble("amount"),
@@ -90,13 +81,14 @@ public class TableController implements Initializable {
                 //System.out.println(tableList.get(0).getDetail());
             }
             while (outcomeResultSet.next()) {
-                outcomeSummaryTable = new SummaryTable(outcomeResultSet.getInt("id"),
+                SummaryTable outcomeSummaryTable = new SummaryTable(outcomeResultSet.getInt("id"),
                         outcomeResultSet.getString("date"), outcomeResultSet.getDouble("amount"),
                         outcomeResultSet.getString("detail"), outcomeResultSet.getString("type"));
                 tableList.add(outcomeSummaryTable);
+
                 datalist.add(new XYChart.Data<String,Double>(outcomeSummaryTable.getDate(),outcomeSummaryTable.getAmount()));
-                outcomeList.add(outcomeSummaryTable.getAmount());
                 dateList.add(outcomeSummaryTable.getDate());
+                System.out.print(dateList);
             }
             while (savingResultSet.next()) {
                 SummaryTable savingSummaryTable = new SummaryTable(savingResultSet.getInt("id"),
@@ -124,8 +116,6 @@ public class TableController implements Initializable {
         tableView.setItems(tableList);
     }
 
-    // TODO complete a graph design.
-
     @FXML
     public void openGraph(ActionEvent event) {
         Parent root;
@@ -134,35 +124,14 @@ public class TableController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Expenses Graph");
             Scene scene = new Scene(root);
-            scene.getStylesheets().add("Wallet/GraphStyle.css");
+           // scene.getStylesheets().add("Wallet/GraphStyle.css");
             stage.setScene(scene);
             stage.show();
-            convertToChart();
             // Hide this current window
             // ((Node)(event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    @FXML
-    public void convertToChart() {
-        //dateList
-        xaxis = new CategoryAxis();
-        yaxis = new NumberAxis();
-        xaxis.setLabel("Date");
-        yaxis.setLabel("Amount");
-        xaxis.setCategories(FXCollections.<String> observableArrayList(dateList));
-        XYChart.Series XYSeries = new XYChart.Series(datalist);
-        XYSeries.setName("Expenses Chart");
-
-        lineChart = new LineChart<>(xaxis,yaxis);
-        lineChart.setTitle("Expenses Chart");
-        lineChart.setPrefHeight(400);
-        lineChart.getData().add(XYSeries);
-
-
 
     }
 }
