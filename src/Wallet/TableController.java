@@ -48,6 +48,8 @@ public class TableController implements Initializable {
     Button closeButton;
     @FXML
     Button showChart;
+    @FXML
+    Button remove;
 
 
     public static List<String> dateList = new ArrayList<>();
