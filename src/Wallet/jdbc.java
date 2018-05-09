@@ -53,6 +53,21 @@ public class jdbc {
         return sql.toString();
     }
 
+    public static void removeRecord(String tablename, String colum, Object values) {
+        openConnection();
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            String sql = "delete from " + tablename + " where " + colum + " = ";
+            sql += createInsertStatement(values);
+            System.out.println(sql);
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
 
     public static void submitRecord(String tableName, Object... values) {
         openConnection();

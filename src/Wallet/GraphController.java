@@ -56,5 +56,5 @@ public class GraphController implements Initializable {
         lineChart.setTitle("Expenses Chart");
        // convertToGraph();
     }
-    
+
 }

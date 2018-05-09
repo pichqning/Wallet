@@ -16,6 +16,7 @@
             <TableColumn fx:id="typeColumn" prefWidth="95.0" text="Type" />
         </columns>
       </TableView>
+      <Button layoutX="432.0" layoutY="440.0" mnemonicParsing="false" text="remove" />
       <Button fx:id="closeButton" layoutX="173.0" layoutY="453.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="117.0" text="close" />
       <Button fx:id="showChart" layoutX="338.0" layoutY="453.0" mnemonicParsing="false" onAction="#openGraph" prefHeight="25.0" prefWidth="158.0" text="show chart" />
    </children>

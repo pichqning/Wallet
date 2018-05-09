@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 import static Wallet.jdbc.connection;
 import static Wallet.jdbc.openConnection;
+import static Wallet.jdbc.removeRecord;
 
 public class TableController implements Initializable {
 
@@ -117,6 +118,16 @@ public class TableController implements Initializable {
         tableView.setItems(tableList);
     }
 
+    @FXML
+    public void clear() {
+
+    }
+
+    @FXML
+    public void remove(){
+        removeRecord(tableView.getSelectionModel().getSelectedItem().getType(),"id",tableView.getSelectionModel().getSelectedItem().getId());
+        loadDataFromDB();
+    }
     @FXML
     public void openGraph(ActionEvent event) {
         Parent root;
