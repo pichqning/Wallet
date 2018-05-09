@@ -59,7 +59,6 @@ public class StatusController implements Initializable {
     //every time user clicked the submit button, setBox will be called.
     @FXML
     public void setBox() {
-        //TODO fix the font and size.
         incomeBox.setText(String.valueOf(getTotalFromColumn("income")));
         outcomeBox.setText(String.valueOf(getTotalFromColumn("outcome")));
         savingBox.setText(String.valueOf(getTotalFromColumn("saving")));
