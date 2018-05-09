@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,10 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static Wallet.jdbc.connection;
@@ -43,11 +46,25 @@ public class TableController implements Initializable {
     Button closeButton;
     @FXML
     Button showChart;
+    @FXML
+    LineChart lineChart;
+    @FXML
+    NumberAxis yaxis;
+    @FXML
+    CategoryAxis xaxis;
+
+    ObservableList<SummaryTable> tableList;
+    List<String> dateList;
+    List<Double> outcomeList;
+    ObservableList datalist;
+
+    private SummaryTable outcomeSummaryTable;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        datalist = FXCollections.observableArrayList();
+        tableList = FXCollections.observableArrayList();
         loadDataFromDB();
     }
 
@@ -59,11 +76,8 @@ public class TableController implements Initializable {
 
     @FXML
     public void loadDataFromDB() {
-        ObservableList<SummaryTable> tableList = null;
         try {
-
             openConnection();
-            tableList = FXCollections.observableArrayList();
             //select * from where date like... is... in case of insert specific month and year. (optional)
             ResultSet incomeResultSet = connection.createStatement().executeQuery("SELECT * FROM income");
             ResultSet outcomeResultSet = connection.createStatement().executeQuery("SELECT * FROM outcome");
@@ -76,10 +90,13 @@ public class TableController implements Initializable {
                 //System.out.println(tableList.get(0).getDetail());
             }
             while (outcomeResultSet.next()) {
-                SummaryTable outcomeSummaryTable = new SummaryTable(outcomeResultSet.getInt("id"),
+                outcomeSummaryTable = new SummaryTable(outcomeResultSet.getInt("id"),
                         outcomeResultSet.getString("date"), outcomeResultSet.getDouble("amount"),
                         outcomeResultSet.getString("detail"), outcomeResultSet.getString("type"));
                 tableList.add(outcomeSummaryTable);
+                datalist.add(new XYChart.Data<String,Double>(outcomeSummaryTable.getDate(),outcomeSummaryTable.getAmount()));
+                outcomeList.add(outcomeSummaryTable.getAmount());
+                dateList.add(outcomeSummaryTable.getDate());
             }
             while (savingResultSet.next()) {
                 SummaryTable savingSummaryTable = new SummaryTable(savingResultSet.getInt("id"),
@@ -120,6 +137,7 @@ public class TableController implements Initializable {
             scene.getStylesheets().add("Wallet/GraphStyle.css");
             stage.setScene(scene);
             stage.show();
+            convertToChart();
             // Hide this current window
             // ((Node)(event.getSource())).getScene().getWindow().hide();
         } catch (IOException e) {
@@ -128,4 +146,23 @@ public class TableController implements Initializable {
 
     }
 
+    @FXML
+    public void convertToChart() {
+        //dateList
+        xaxis = new CategoryAxis();
+        yaxis = new NumberAxis();
+        xaxis.setLabel("Date");
+        yaxis.setLabel("Amount");
+        xaxis.setCategories(FXCollections.<String> observableArrayList(dateList));
+        XYChart.Series XYSeries = new XYChart.Series(datalist);
+        XYSeries.setName("Expenses Chart");
+
+        lineChart = new LineChart<>(xaxis,yaxis);
+        lineChart.setTitle("Expenses Chart");
+        lineChart.setPrefHeight(400);
+        lineChart.getData().add(XYSeries);
+
+
+
+    }
 }

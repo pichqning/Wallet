@@ -56,12 +56,6 @@ public class WalletController extends jdbc {
     @FXML
     Button backButton;
     @FXML
-    LineChart lineChart;
-    @FXML
-    Axis yaxis;
-    @FXML
-    Axis xaxis;
-    @FXML
     Label warning;
 
     //private list of month.

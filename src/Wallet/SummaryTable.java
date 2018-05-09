@@ -1,6 +1,8 @@
 package Wallet;
 
 
+import java.util.List;
+
 public class SummaryTable {
     private int id;
     private String date;
@@ -36,4 +38,5 @@ public class SummaryTable {
     public String getType() {
         return type;
     }
+
 }
