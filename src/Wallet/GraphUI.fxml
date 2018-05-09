@@ -13,10 +13,10 @@
       <Label prefHeight="302.0" prefWidth="560.0" rotate="-158.7" style="-fx-background-color: #deaf35;" />
       <LineChart fx:id="lineChart" prefWidth="528.0" style="-fx-text-fill: #404040;" title="Expenses">
         <xAxis>
-          <CategoryAxis side="BOTTOM" visible="true" fx:id="xaxis" />
+          <CategoryAxis side="BOTTOM" visible="true" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="yaxis" />
+          <NumberAxis fx:id="yAxis" />
         </yAxis>
       </LineChart>
       <Button fx:id="backButton" layoutX="269.0" layoutY="426.0" mnemonicParsing="false" onAction="#close" text="Back" />

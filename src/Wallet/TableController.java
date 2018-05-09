@@ -17,12 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -53,7 +51,7 @@ public class TableController implements Initializable {
 
 
     public static List<String> dateList = new ArrayList<>();
-    public static ObservableList datalist = FXCollections.observableArrayList();
+    public static ObservableList dataList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,7 +88,7 @@ public class TableController implements Initializable {
                         outcomeResultSet.getString("detail"), outcomeResultSet.getString("type"));
                 tableList.add(outcomeSummaryTable);
 
-                datalist.add(new XYChart.Data<String,Double>(outcomeSummaryTable.getDate(),outcomeSummaryTable.getAmount()));
+                dataList.add(new XYChart.Data<String,Double>(outcomeSummaryTable.getDate(),outcomeSummaryTable.getAmount()));
                 dateList.add(outcomeSummaryTable.getDate());
                 System.out.print(dateList);
             }

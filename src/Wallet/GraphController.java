@@ -14,16 +14,16 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static Wallet.TableController.datalist;
+import static Wallet.TableController.dataList;
 import static Wallet.TableController.dateList;
 
 public class GraphController implements Initializable {
     @FXML
    private LineChart <String,Number>lineChart;
     @FXML
-    private NumberAxis yaxis;
+    private NumberAxis yAxis;
     @FXML
-    private CategoryAxis xaxis;
+    private CategoryAxis xAxis;
 
 
     @FXML
@@ -35,22 +35,22 @@ public class GraphController implements Initializable {
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("converting...");
-        System.out.println(datalist.toString());
+        System.out.println(dataList.toString());
         System.out.println(dateList.toString());
 
-        xaxis = new CategoryAxis();
+         xAxis = new CategoryAxis();
         System.out.println("creating x axis.");
-        yaxis = new NumberAxis();
+         yAxis = new NumberAxis();
         System.out.println("creating y axis.");
 
-        xaxis.setLabel("Date");
-        yaxis.setLabel("Amount");
+       xAxis .setLabel("Date");
+        yAxis.setLabel("Amount");
 
-        xaxis.setCategories(FXCollections.<String> observableArrayList(dateList));
-        XYChart.Series XYSeries = new XYChart.Series(datalist);
+        xAxis.setCategories(FXCollections.<String> observableArrayList(dateList));
+        XYChart.Series XYSeries = new XYChart.Series(dataList);
         XYSeries.setName("Expenses Chart");
 
-        lineChart = new LineChart<>(xaxis,yaxis);
+        lineChart = new LineChart<>(xAxis,yAxis);
         lineChart.getData().add(XYSeries);
         lineChart.setPrefHeight(600);
         lineChart.setTitle("Expenses Chart");
