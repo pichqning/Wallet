@@ -42,26 +42,19 @@ public class GraphController implements Initializable {
         System.out.println("creating x axis.");
         yaxis = new NumberAxis();
         System.out.println("creating y axis.");
+
         xaxis.setLabel("Date");
         yaxis.setLabel("Amount");
+
         xaxis.setCategories(FXCollections.<String> observableArrayList(dateList));
         XYChart.Series XYSeries = new XYChart.Series(datalist);
         XYSeries.setName("Expenses Chart");
+
         lineChart = new LineChart<>(xaxis,yaxis);
+        lineChart.getData().add(XYSeries);
         lineChart.setPrefHeight(600);
         lineChart.setTitle("Expenses Chart");
-        lineChart.getData().add(XYSeries);
        // convertToGraph();
     }
-
-    @FXML
-    public void convertToGraph() {
-        //dateList
-
-
-
-
-
-
-    }
+    
 }

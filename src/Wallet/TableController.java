@@ -48,6 +48,7 @@ public class TableController implements Initializable {
     @FXML
     Button showChart;
 
+
     public static List<String> dateList = new ArrayList<>();
     public static ObservableList datalist = FXCollections.observableArrayList();
 
@@ -123,8 +124,11 @@ public class TableController implements Initializable {
             root = FXMLLoader.load(getClass().getResource("GraphUI.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Expenses Graph");
+
+            stage.setTitle("Line Chart Sample");
             Scene scene = new Scene(root);
-           // scene.getStylesheets().add("Wallet/GraphStyle.css");
+
+           scene.getStylesheets().add("Wallet/GraphStyle.css");
             stage.setScene(scene);
             stage.show();
             // Hide this current window
