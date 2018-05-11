@@ -53,8 +53,7 @@ public class TableController implements Initializable {
 
 
     public static List<String> dateList = new ArrayList<>();
-    public static ObservableList datalist = FXCollections.observableArrayList();
-
+    public static List<Double> datalist = new ArrayList<>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadDataFromDB();
@@ -90,7 +89,7 @@ public class TableController implements Initializable {
                         outcomeResultSet.getString("detail"), outcomeResultSet.getString("type"));
                 tableList.add(outcomeSummaryTable);
 
-                datalist.add(new XYChart.Data<String,Double>(outcomeSummaryTable.getDate(),outcomeSummaryTable.getAmount()));
+                datalist.add(outcomeSummaryTable.getAmount());
                 dateList.add(outcomeSummaryTable.getDate());
                 System.out.print(dateList);
             }

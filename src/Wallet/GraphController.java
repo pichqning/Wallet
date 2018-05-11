@@ -19,11 +19,18 @@ import static Wallet.TableController.dateList;
 
 public class GraphController implements Initializable {
     @FXML
-   private LineChart <String,Number>lineChart;
+   private LineChart <String,Double>lineChart;
     @FXML
     private NumberAxis yaxis;
     @FXML
     private CategoryAxis xaxis;
+
+    private XYChart.Series <String,Double> dataSeries = new XYChart.Series<>();
+
+    private double data2017 , data2018 , data2019 , data2020 , data2021 = 0;
+
+
+
 
 
     @FXML
@@ -31,30 +38,48 @@ public class GraphController implements Initializable {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
     @Override
-    @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("converting...");
-        System.out.println(datalist.toString());
-        System.out.println(dateList.toString());
+        loadChart();
 
-        xaxis = new CategoryAxis();
-        System.out.println("creating x axis.");
-        yaxis = new NumberAxis();
-        System.out.println("creating y axis.");
-
-        xaxis.setLabel("Date");
-        yaxis.setLabel("Amount");
-
-        xaxis.setCategories(FXCollections.<String> observableArrayList(dateList));
-        XYChart.Series XYSeries = new XYChart.Series(datalist);
-        XYSeries.setName("Expenses Chart");
-
-        lineChart = new LineChart<>(xaxis,yaxis);
-        lineChart.getData().add(XYSeries);
-        lineChart.setPrefHeight(600);
-        lineChart.setTitle("Expenses Chart");
-       // convertToGraph();
     }
 
+    private void loadChart() {
+        String[] year;
+        for (int i = 0 ; i< dateList.size() ; i++) {
+            year = dateList.get(i).split("-");
+            addToValueYear(year[0] , datalist.get(0));
+        }
+
+        dataSeries.setName("Expenses");
+        dataSeries.getData().add(new XYChart.Data<>("2017",data2017));
+        dataSeries.getData().add(new XYChart.Data<>("2018", data2018));
+        dataSeries.getData().add(new XYChart.Data<>("2019",data2019));
+        dataSeries.getData().add(new XYChart.Data<>("2020",data2020));
+        dataSeries.getData().add(new XYChart.Data<>("2021",data2021));
+
+        lineChart.getData().add(dataSeries);
+
+    }
+
+    private double addToValueYear (String year , double data) {
+        if (year.equals("2017")) return data2017 += data;
+        else if (year.equals("2018")) return data2018 += data;
+        else if (year.equals("2019")) return data2019 += data;
+        else if (year.equals("2020")) return data2020 += data;
+        else if (year.equals("2021")) return data2021 += data;
+        return 0;
+    }
+
+
 }
+
+
