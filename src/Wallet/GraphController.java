@@ -21,9 +21,9 @@ public class GraphController implements Initializable {
     @FXML
    private LineChart <String,Double>lineChart;
     @FXML
-    private NumberAxis yaxis;
+    private NumberAxis yAxis;
     @FXML
-    private CategoryAxis xaxis;
+    private CategoryAxis xAxis;
 
     private XYChart.Series <String,Double> dataSeries = new XYChart.Series<>();
 
@@ -47,6 +47,7 @@ public class GraphController implements Initializable {
      * @param resources The resources used to localize the root object, or <tt>null</tt> if
      */
     @Override
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
         loadChart();
 

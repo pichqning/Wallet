@@ -155,12 +155,6 @@ public class WalletController extends jdbc {
     }
 
     @FXML
-    public void close(ActionEvent event) {
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-
-    @FXML
     public void openTable(ActionEvent event) {
         Parent root;
         try {
@@ -190,7 +184,12 @@ public class WalletController extends jdbc {
             Scene scene = new Scene(root);
             scene.getStylesheets().add("Wallet/StatusStyle.css");
             stage.setScene(scene);
+            if (stage.isShowing()) {
+                Platform.exit();
+            }
             stage.show();
+
+
         }
         catch (IOException e ) {
             e.printStackTrace();
