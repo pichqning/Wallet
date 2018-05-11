@@ -54,6 +54,8 @@ public class TableController implements Initializable {
 
     public static List<String> dateList = new ArrayList<>();
     public static List<Double> datalist = new ArrayList<>();
+    public static List<String> dateList2 = new ArrayList<>();
+    public static List<Double> dataList2 = new ArrayList<>();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadDataFromDB();
@@ -81,6 +83,9 @@ public class TableController implements Initializable {
                         incomeResultSet.getString("date"), incomeResultSet.getDouble("amount"),
                         incomeResultSet.getString("detail"), incomeResultSet.getString("type"));
                 tableList.add(incomeSummaryTable);
+
+                dataList2.add(incomeSummaryTable.getAmount());
+                dateList2.add(incomeSummaryTable.getDate());
                 //System.out.println(tableList.get(0).getDetail());
             }
             while (outcomeResultSet.next()) {

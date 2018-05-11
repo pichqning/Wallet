@@ -7,7 +7,7 @@
 }
 
 .chart-title {
-    -fx-text-fill: #4682b4;
+    -fx-text-fill: #404040;
     -fx-font-size: 16pt;
 }
 
@@ -25,13 +25,12 @@
 }
 
 .chart-legend-item{
-    -fx-text-fill: white
-;
+    -fx-text-fill: white;
 }
 
 .chart-plot-background {
     -fx-background-color: white;
-    -fx-opacity: 50%;
+    -fx-opacity: 70%;
 }
 .chart-vertical-grid-lines {
     -fx-stroke: #404040;
@@ -67,5 +66,14 @@
 }
 
 .label {
-     -fx-opacity: 40%;
+     -fx-opacity: 100%;
 }
+
+
+.default-color0.chart-series-line { -fx-stroke: #e95343; }
+.default-color1.chart-series-line { -fx-stroke: green; }
+.chart-series-line {
+    -fx-stroke-width: 4px;
+}
+
+

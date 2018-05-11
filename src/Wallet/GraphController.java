@@ -1,6 +1,5 @@
 package Wallet;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,13 +8,11 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static Wallet.TableController.datalist;
-import static Wallet.TableController.dateList;
+import static Wallet.TableController.*;
 
 public class GraphController implements Initializable {
     @FXML
@@ -26,8 +23,10 @@ public class GraphController implements Initializable {
     private CategoryAxis xAxis;
 
     private XYChart.Series <String,Double> dataSeries = new XYChart.Series<>();
+    private XYChart.Series <String,Double> dataSeries2 = new XYChart.Series<>();
 
-    private double data2017 , data2018 , data2019 , data2020 , data2021 = 0;
+    private double outcome2017, outcome2018, outcome2019, outcome2020, outcome2021 = 0;
+    private double income2017,income2018,income2019,income2020,income2021 = 0 ;
 
 
 
@@ -49,34 +48,63 @@ public class GraphController implements Initializable {
     @Override
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        loadChart();
+        loadChartOutcome();
+        loadChartIncome();
 
     }
 
-    private void loadChart() {
+    private void loadChartOutcome() {
         String[] year;
         for (int i = 0 ; i< dateList.size() ; i++) {
             year = dateList.get(i).split("-");
-            addToValueYear(year[0] , datalist.get(0));
+            addToOutcomeYear(year[0] , datalist.get(0));
         }
 
-        dataSeries.setName("Expenses");
-        dataSeries.getData().add(new XYChart.Data<>("2017",data2017));
-        dataSeries.getData().add(new XYChart.Data<>("2018", data2018));
-        dataSeries.getData().add(new XYChart.Data<>("2019",data2019));
-        dataSeries.getData().add(new XYChart.Data<>("2020",data2020));
-        dataSeries.getData().add(new XYChart.Data<>("2021",data2021));
+        dataSeries.setName("Outcome");
+        dataSeries.getData().add(new XYChart.Data<>("2017", outcome2017));
+        dataSeries.getData().add(new XYChart.Data<>("2018", outcome2018));
+        dataSeries.getData().add(new XYChart.Data<>("2019", outcome2019));
+        dataSeries.getData().add(new XYChart.Data<>("2020", outcome2020));
+        dataSeries.getData().add(new XYChart.Data<>("2021", outcome2021));
 
         lineChart.getData().add(dataSeries);
 
     }
 
-    private double addToValueYear (String year , double data) {
-        if (year.equals("2017")) return data2017 += data;
-        else if (year.equals("2018")) return data2018 += data;
-        else if (year.equals("2019")) return data2019 += data;
-        else if (year.equals("2020")) return data2020 += data;
-        else if (year.equals("2021")) return data2021 += data;
+    private void loadChartIncome() {
+        String[] year;
+        for (int i = 0 ; i< dateList2.size() ; i++) {
+            year = dateList2.get(i).split("-");
+            addToIncomeYear(year[0] , dataList2.get(0));
+        }
+
+        dataSeries2.setName("Income");
+        dataSeries2.getData().add(new XYChart.Data<>("2017", income2017));
+        dataSeries2.getData().add(new XYChart.Data<>("2018", income2018));
+        dataSeries2.getData().add(new XYChart.Data<>("2019", income2019));
+        dataSeries2.getData().add(new XYChart.Data<>("2020", income2020));
+        dataSeries2.getData().add(new XYChart.Data<>("2021", income2021));
+
+        lineChart.getData().add(dataSeries2);
+
+
+    }
+
+    private double addToOutcomeYear (String year , double data) {
+        if (year.equals("2017")) return outcome2017 += data;
+        else if (year.equals("2018")) return outcome2018 += data;
+        else if (year.equals("2019")) return outcome2019 += data;
+        else if (year.equals("2020")) return outcome2020 += data;
+        else if (year.equals("2021")) return outcome2021 += data;
+        return 0;
+    }
+
+    private double addToIncomeYear (String year , double data) {
+        if (year.equals("2017")) return income2017 += data;
+        else if (year.equals("2018")) return income2018 += data;
+        else if (year.equals("2019")) return income2019 += data;
+        else if (year.equals("2020")) return income2020 += data;
+        else if (year.equals("2021")) return income2021 += data;
         return 0;
     }
 

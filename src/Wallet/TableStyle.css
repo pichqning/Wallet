@@ -28,11 +28,12 @@
 
 .table-view {
     -fx-base: #ffffff;
-    -fx-control-inner-background: #ffffff;
+    -fx-control-inner-background: white;
     -fx-background-color: #cfab52;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
+
 }
 
 .table-view .column-header-background {
