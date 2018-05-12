@@ -85,24 +85,21 @@ public class WalletController extends jdbc {
     }
 
     public void InvalidInput() {
-
-        warning.setText("Invalid input.");
-        System.out.println("invalid input");
-//        if (detail.getText()==null || amount.getText()==null)  {
-//               warning.setText("Please input detail and amount.");
-//            }
-        //check date unmatch with year (leap year for february) 2020 2024 2028
-        //check date unmatch with month (30/31 days)
-//        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
-//               warning.setText("Invalid date.");
-//            }
-        //input only number for amount
-        try {
-            if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
-        } catch (IllegalFormatException e) {
-            warning.setText("Cannot record the data.");
+        if (detail.getText().length()==0|| amount.getText().length()==0)  {
+            warning.setText("Please input detail and amount.");
         }
-    }
+        // check date unmatch with year (leap year for february) 2020 2024 2028
+        //check date unmatch with month (30/31 days)
+        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
+            warning.setText("Invalid date."); }
+            //input only number for amount
+        try {
+            double a = Double.parseDouble(amount.getText());
+        } catch (IllegalFormatException e) {
+                warning.setText("Cannot record the data.");
+        }
+        }
+
     public void setAllDefault() {
         warning.setText("");
         detail.setText("");
@@ -110,10 +107,8 @@ public class WalletController extends jdbc {
     }
 
     public void handleRecord(ActionEvent event) {
+         InvalidInput();
         try {
-            if (detail == null || amount.getText() == null) {
-                InvalidInput();
-            }
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
                 submitRecord("income", amount.getText(), detail.getText(), convertDate(), "income");
@@ -127,14 +122,14 @@ public class WalletController extends jdbc {
             } else {
                 System.out.println("Else");
             }
-            openStatus(event);
             setAllDefault();
         } catch (Exception e) {
             System.out.println("Cannot Recording");
             InvalidInput();
+            }
+        openStatus(event);
         }
 
-    }
 
     //convert selected items to Localdate format.
     public LocalDate convertDate() {
