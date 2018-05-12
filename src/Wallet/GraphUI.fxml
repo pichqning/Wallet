@@ -20,7 +20,7 @@
           <NumberAxis fx:id="yAxis" />
         </yAxis>
       </LineChart>
-      <ComboBox layoutX="421.0" layoutY="445.0" prefHeight="31.0" prefWidth="103.0" />
+      <ComboBox fx:id="year" layoutX="421.0" layoutY="445.0" onAction="#loadChart" prefHeight="31.0" prefWidth="103.0" />
       <Button fx:id="backButton" layoutX="545.0" layoutY="445.0" mnemonicParsing="false" onAction="#close" text="Back" />
    </children>
 </AnchorPane>

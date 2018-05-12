@@ -52,27 +52,27 @@ public class GraphController implements Initializable {
             }
             year.getSelectionModel().select(0);
         }
-        loadChartOutcome();
-        loadChartIncome();
 
+        loadChart();
 
     }
 
-    private void addYear() {
-        if (year != null) {
-            for (int i = 2017; i <= 2021; i++) {
-                year.getItems().add(i);
-            }
-            year.getSelectionModel().select(0);
-        }
+    public void loadChart() {
+
+        loadChartOutcome();
+        loadChartIncome();
     }
 
 
     private void loadChartOutcome() {
+        dataSeries.getData().clear();
         String[] year;
+        out1=0;out2=0;out3=0;out4=0;out5=0;out6=0;out7=0;out8=0;out9=0;out10=0;out11=0;out12=0;
+
         for (int i = 0 ; i< dateList.size() ; i++) {
             year = dateList.get(i).split("-");
-            if (thisYear(year[0])) addToOutcomeMonth(year[1] , datalist.get(0));
+            System.out.println("datalist " + datalist.get(i));
+            if (thisYear(year[0])) addToOutcomeMonth(year[1] , datalist.get(i));
         }
 
         dataSeries.setName("Outcome");
@@ -94,11 +94,28 @@ public class GraphController implements Initializable {
     }
 
     private void loadChartIncome() {
+        dataSeries2.getData().clear();
         String[] year;
+        in1=0;in2=0;in3=0;in4=0;in5=0;in6=0;in7=0;in8=0;in9=0;in10=0;in11=0;in12=0;
+
+
         for (int i = 0 ; i< dateList2.size() ; i++) {
             year = dateList2.get(i).split("-");
-            if (thisYear(year[0])) addToIncomeMonth(year[1] , dataList2.get(0));
+            if (thisYear(year[0])) addToIncomeMonth(year[1] , dataList2.get(i));
         }
+
+        System.out.println(in1);
+        System.out.println(in2);
+        System.out.println(in3);
+        System.out.println(in4);
+        System.out.println(in5);
+        System.out.println(in6);
+        System.out.println(in7);
+        System.out.println(in8);
+        System.out.println(in9);
+        System.out.println(in10);
+        System.out.println(in11);
+        System.out.println(in12);
 
         dataSeries2.setName("Income");
         dataSeries2.getData().add(new XYChart.Data<>(Month.JANUARY.toString(),in1));
@@ -119,12 +136,12 @@ public class GraphController implements Initializable {
     }
 
     private boolean thisYear(String years) {
-     //   String now = String.valueOf(year.getSelectionModel().getSelectedItem());
+
+        String now = String.valueOf(year.getSelectionModel().getSelectedItem());
         String date = LocalDate.now().toString();
         String[] dates = date.split("-");
-        String now = dates[0];
         if (now == null) now = dates[0];
-        lineChart.setTitle("Expenses year" + now);
+        lineChart.setTitle("Expenses year " + now);
         if (years.equals(now) )return true;
         return false;
     }

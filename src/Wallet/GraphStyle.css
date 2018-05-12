@@ -49,7 +49,7 @@
 #backButton{
     -fx-background-color: none;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 14pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
     -fx-border-color: white;
     -fx-background-radius: 10;
@@ -89,6 +89,27 @@
 .menu-item:hover{
     -fx-border-color: white;
     -fx-border-radius: 10;
+}
+
+.combo-box-base {
+    -fx-background-color: white;
+    -fx-opacity: 70%;
+    -fx-background-radius: 10;
+    -fx-border-color: white;
+    -fx-border-radius: 10 ;
+    -fx-text-fill: #404040;
+    -fx-font-size: 12pt;
+
+}
+
+
+.combo-box-base:hover {
+    -fx-background-color: white;
+    -fx-border-color: none;
+    -fx-opacity: 60%;
+    -fx-text-fill: white;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 
