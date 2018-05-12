@@ -23,7 +23,6 @@ public class GraphController implements Initializable {
 
     private XYChart.Series <String,Double> dataSeries = new XYChart.Series<>();
     private XYChart.Series <String,Double> dataSeries2 = new XYChart.Series<>();
-    private double income2017,income2018,income2019,income2020,income2021 = 0 ;
     private double out1 ,out2 ,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12 =0;
     private double in1,in2,in3,in4,in5,in6,in7,in8,in9,in10,in11,in12 = 0 ;
 
@@ -47,7 +46,12 @@ public class GraphController implements Initializable {
     @Override
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        addYear();
+        if (year != null) {
+            for (int i = 2017; i <= 2021; i++) {
+                year.getItems().add(i);
+            }
+            year.getSelectionModel().select(0);
+        }
         loadChartOutcome();
         loadChartIncome();
 
@@ -56,12 +60,10 @@ public class GraphController implements Initializable {
 
     private void addYear() {
         if (year != null) {
-            //I cant remember the range of year we set LOL pls fix it if i'm wrong.
             for (int i = 2017; i <= 2021; i++) {
                 year.getItems().add(i);
             }
             year.getSelectionModel().select(0);
-
         }
     }
 
@@ -70,7 +72,7 @@ public class GraphController implements Initializable {
         String[] year;
         for (int i = 0 ; i< dateList.size() ; i++) {
             year = dateList.get(i).split("-");
-            if (thisYear(year[0])) addToOutcomeMonth(year[0] , datalist.get(0));
+            if (thisYear(year[0])) addToOutcomeMonth(year[1] , datalist.get(0));
         }
 
         dataSeries.setName("Outcome");
@@ -95,7 +97,7 @@ public class GraphController implements Initializable {
         String[] year;
         for (int i = 0 ; i< dateList2.size() ; i++) {
             year = dateList2.get(i).split("-");
-            if (thisYear(year[0])) addToIncomeMonth(year[0] , dataList2.get(0));
+            if (thisYear(year[0])) addToIncomeMonth(year[1] , dataList2.get(0));
         }
 
         dataSeries2.setName("Income");
@@ -117,9 +119,10 @@ public class GraphController implements Initializable {
     }
 
     private boolean thisYear(String years) {
-        String now = String.valueOf(year.getSelectionModel().getSelectedItem());
+     //   String now = String.valueOf(year.getSelectionModel().getSelectedItem());
         String date = LocalDate.now().toString();
         String[] dates = date.split("-");
+        String now = dates[0];
         if (now == null) now = dates[0];
         lineChart.setTitle("Expenses year" + now);
         if (years.equals(now) )return true;

@@ -1,15 +1,10 @@
 package Wallet;
-
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-
-import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class jdbc {
     static String userName;
@@ -21,18 +16,27 @@ public class jdbc {
     static Connection connection;
 
     public static void readFile() {
-        ClassLoader cl = jdbc.class.getClassLoader();
-        InputStream is = cl.getResourceAsStream("Wallet/UserId.txt");
-
-        Scanner fileScanner = new Scanner(is);
-
-        while (fileScanner.hasNextLine()) {
-            String list = fileScanner.nextLine();
-            String holder[] = list.split("-");
-            userName = holder[0];
-            passWord = holder[1];
+        File file = null;
+        try {
+            file = new File("src/Wallet/UserId");
+            //in case of getting wrong directory it will print caution text out
+        }catch (Exception e){
+            System.out.println("Could not access file " + "src/Wallet/UserId.txt");
+            return;
         }
-        fileScanner.close();
+        BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String readline = reader.readLine();
+            while (readline != null) {
+                    String[] array = readline.split(";");
+                    userName = array[0];
+                    passWord = array[1];
+                readline = reader.readLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void openConnection() {
