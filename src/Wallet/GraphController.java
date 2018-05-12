@@ -15,6 +15,11 @@ import java.util.ResourceBundle;
 
 import static Wallet.TableController.*;
 
+/**
+ *
+ * @author Pichaaun Popukdee , Raksani Kunamas
+ */
+
 public class GraphController implements Initializable {
     @FXML
     private LineChart <String,Double> lineChart;
@@ -23,6 +28,9 @@ public class GraphController implements Initializable {
 
     private XYChart.Series <String,Double> dataSeries = new XYChart.Series<>();
     private XYChart.Series <String,Double> dataSeries2 = new XYChart.Series<>();
+    /**
+     * Parameter for keep value of income and outcome in 12 months
+     */
     private double out1 ,out2 ,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12 =0;
     private double in1,in2,in3,in4,in5,in6,in7,in8,in9,in10,in11,in12 = 0 ;
 
@@ -64,6 +72,9 @@ public class GraphController implements Initializable {
     }
 
 
+    /**
+     * Method for create outcome line.
+     */
     private void loadChartOutcome() {
         dataSeries.getData().clear();
         String[] year;
@@ -93,6 +104,9 @@ public class GraphController implements Initializable {
 
     }
 
+    /**
+     * Method for create income line.
+     */
     private void loadChartIncome() {
         dataSeries2.getData().clear();
         String[] year;
@@ -103,20 +117,6 @@ public class GraphController implements Initializable {
             year = dateList2.get(i).split("-");
             if (thisYear(year[0])) addToIncomeMonth(year[1] , dataList2.get(i));
         }
-
-        System.out.println(in1);
-        System.out.println(in2);
-        System.out.println(in3);
-        System.out.println(in4);
-        System.out.println(in5);
-        System.out.println(in6);
-        System.out.println(in7);
-        System.out.println(in8);
-        System.out.println(in9);
-        System.out.println(in10);
-        System.out.println(in11);
-        System.out.println(in12);
-
         dataSeries2.setName("Income");
         dataSeries2.getData().add(new XYChart.Data<>(Month.JANUARY.toString(),in1));
         dataSeries2.getData().add(new XYChart.Data<>(Month.FEBRUARY.toString(),in2));
@@ -135,6 +135,11 @@ public class GraphController implements Initializable {
 
     }
 
+    /**
+     * Check the year that user want chart show.
+     * @param years
+     * @return year from combobox , but if the user doesn't select the year will be this year from localdate.
+     */
     private boolean thisYear(String years) {
 
         String now = String.valueOf(year.getSelectionModel().getSelectedItem());
@@ -146,36 +151,42 @@ public class GraphController implements Initializable {
         return false;
     }
 
-    private double addToIncomeMonth ( String month , double data) {
-        if (month.equals("01")) return in1 += data;
-        else if (month.equals("02")) return in2 += data;
-        else if (month.equals("03")) return in3 += data;
-        else if (month.equals("04")) return in4 += data;
-        else if (month.equals("05")) return in5 += data;
-        else if (month.equals("06")) return in6 += data;
-        else if (month.equals("07")) return in7+= data;
-        else if (month.equals("08")) return in8 += data;
-        else if (month.equals("09")) return in9 += data;
-        else if (month.equals("10")) return in10 += data;
-        else if (month.equals("11")) return in11+= data;
-        else if (month.equals("12")) return in12 += data;
-        return 0;
+
+    /**
+     *
+     * 
+     * @param month
+     * @param data
+     *
+     */
+    private void addToIncomeMonth ( String month , double data) {
+        if (month.equals("01")) in1 += data;
+        else if (month.equals("02")) in2 += data;
+        else if (month.equals("03")) in3 += data;
+        else if (month.equals("04")) in4 += data;
+        else if (month.equals("05")) in5 += data;
+        else if (month.equals("06")) in6 += data;
+        else if (month.equals("07")) in7+= data;
+        else if (month.equals("08")) in8 += data;
+        else if (month.equals("09")) in9 += data;
+        else if (month.equals("10")) in10 += data;
+        else if (month.equals("11")) in11+= data;
+        else if (month.equals("12")) in12 += data;
     }
 
-    private double addToOutcomeMonth ( String month , double data) {
-        if (month.equals("01")) return out1 += data;
-        else if (month.equals("02")) return out2 += data;
-        else if (month.equals("03")) return out3 += data;
-        else if (month.equals("04")) return out4 += data;
-        else if (month.equals("05")) return out5 += data;
-        else if (month.equals("06")) return out6 += data;
-        else if (month.equals("07")) return out7 += data;
-        else if (month.equals("08")) return out8 += data;
-        else if (month.equals("09")) return out9 += data;
-        else if (month.equals("10")) return out10 += data;
-        else if (month.equals("11")) return out11+= data;
-        else if (month.equals("12")) return out12 += data;
-        return 0;
+    private void addToOutcomeMonth ( String month , double data) {
+        if (month.equals("01")) out1 += data;
+        else if (month.equals("02")) out2 += data;
+        else if (month.equals("03")) out3 += data;
+        else if (month.equals("04")) out4 += data;
+        else if (month.equals("05")) out5 += data;
+        else if (month.equals("06")) out6 += data;
+        else if (month.equals("07")) out7 += data;
+        else if (month.equals("08")) out8 += data;
+        else if (month.equals("09")) out9 += data;
+        else if (month.equals("10")) out10 += data;
+        else if (month.equals("11")) out11+= data;
+        else if (month.equals("12")) out12 += data;
     }
 }
 
