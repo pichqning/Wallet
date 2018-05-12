@@ -7,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuBar;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -24,8 +23,6 @@ public class GraphController implements Initializable {
 
     private XYChart.Series <String,Double> dataSeries = new XYChart.Series<>();
     private XYChart.Series <String,Double> dataSeries2 = new XYChart.Series<>();
-
-    private double outcome2017, outcome2018, outcome2019, outcome2020, outcome2021 = 0;
     private double income2017,income2018,income2019,income2020,income2021 = 0 ;
     private double out1 ,out2 ,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12 =0;
     private double in1,in2,in3,in4,in5,in6,in7,in8,in9,in10,in11,in12 = 0 ;
@@ -73,7 +70,7 @@ public class GraphController implements Initializable {
         String[] year;
         for (int i = 0 ; i< dateList.size() ; i++) {
             year = dateList.get(i).split("-");
-            addToOutcomeMonth(year[0] , datalist.get(0));
+            if (thisYear(year[0])) addToOutcomeMonth(year[0] , datalist.get(0));
         }
 
         dataSeries.setName("Outcome");
@@ -98,8 +95,7 @@ public class GraphController implements Initializable {
         String[] year;
         for (int i = 0 ; i< dateList2.size() ; i++) {
             year = dateList2.get(i).split("-");
-            if (thisYear(year[0]))
-            addToIncomeMonth(year[0] , dataList2.get(0));
+            if (thisYear(year[0])) addToIncomeMonth(year[0] , dataList2.get(0));
         }
 
         dataSeries2.setName("Income");
@@ -122,6 +118,9 @@ public class GraphController implements Initializable {
 
     private boolean thisYear(String years) {
         String now = String.valueOf(year.getSelectionModel().getSelectedItem());
+        String date = LocalDate.now().toString();
+        String[] dates = date.split("-");
+        if (now == null) now = dates[0];
         lineChart.setTitle("Expenses year" + now);
         if (years.equals(now) )return true;
         return false;

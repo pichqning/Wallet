@@ -1,9 +1,8 @@
 package Wallet;
 
 
-import java.util.List;
-
 public class SummaryTable {
+
     private int id;
     private String date;
     private String detail;
