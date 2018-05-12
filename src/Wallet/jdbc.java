@@ -6,22 +6,39 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
+import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 import static Wallet.WalletController.*;
 
 public class jdbc {
-    static final String userName = "Raksani";
-    static final String passWord = "07102541b";
+    static String userName;
+    static String passWord;
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/wallet";
 
     static Connection connection;
 
-    public static void openConnection() {
+    public static void readFile() {
+        ClassLoader cl = jdbc.class.getClassLoader();
+        InputStream is = cl.getResourceAsStream("Wallet/UserId.txt");
 
+        Scanner fileScanner = new Scanner(is);
+
+        while (fileScanner.hasNextLine()) {
+            String list = fileScanner.nextLine();
+            String holder[] = list.split("-");
+            userName = holder[0];
+            passWord = holder[1];
+        }
+        fileScanner.close();
+    }
+
+    public static void openConnection() {
+        readFile();
         try {
             Class.forName(JDBC_DRIVER);
             connection = DriverManager.getConnection(DB_URL, userName, passWord);
