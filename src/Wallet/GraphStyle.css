@@ -73,7 +73,22 @@
 .default-color0.chart-series-line { -fx-stroke: #e95343; }
 .default-color1.chart-series-line { -fx-stroke: green; }
 .chart-series-line {
-    -fx-stroke-width: 4px;
+    -fx-stroke-width: 4px
+}
+.menu-bar {
+    -fx-background-color: #deaf33;
+    -fx-text-color : grey;
+    -fx-text-fill: white;
+}
+.menu {
+    -fx-background-color: #deaf33;
+    -fx-border-color: #deaf33;
+    -fx-text-fill: white;
+}
+
+.menu-item:hover{
+    -fx-border-color: white;
+    -fx-border-radius: 10;
 }
 
 

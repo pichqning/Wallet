@@ -50,7 +50,7 @@ public class WalletController extends jdbc {
     @FXML
     MenuItem status;
     @FXML
-    MenuItem monthly;
+    MenuItem table;
     @FXML
     Menu summary;
     @FXML

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
+import java.nio.file.LinkOption;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class TableController implements Initializable {
     public static List<Double> datalist = new ArrayList<>();
     public static List<String> dateList2 = new ArrayList<>();
     public static List<Double> dataList2 = new ArrayList<>();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadDataFromDB();
