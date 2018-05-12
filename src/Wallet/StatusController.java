@@ -3,12 +3,10 @@ package Wallet;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
-
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import static Wallet.jdbc.closeConnection;
 import static Wallet.jdbc.openConnection;
 import static Wallet.jdbc.connection;

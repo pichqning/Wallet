@@ -1,15 +1,7 @@
 package Wallet;
 
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-
-
 import java.sql.*;
 import java.time.LocalDate;
-
-import static Wallet.WalletController.*;
 
 public class jdbc {
     static final String userName = "Raksani";
