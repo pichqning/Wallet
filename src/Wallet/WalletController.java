@@ -32,7 +32,6 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for wallet main window.User can input the detail , amount and select date that want to record the data.
- *
  * @author Pichaaun Popukdee ,Raksani Kunamas.
  */
 
@@ -59,6 +58,8 @@ public class WalletController extends jdbc {
     Menu summary;
     @FXML
     Label warning;
+    @FXML
+    private Stage stage;
 
     //private list of month.
     public void initialize() {
@@ -163,7 +164,11 @@ public class WalletController extends jdbc {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("TableUI.fxml"));
-            Stage stage = new Stage();
+            if (this.stage.isShowing()) {
+                stage.close();
+            } else{
+                this.stage = new Stage();
+        }
             stage.setTitle("Summary");
             Scene scene = new Scene(root);
             scene.getStylesheets().add("Wallet/TableStyle.css");
@@ -190,9 +195,6 @@ public class WalletController extends jdbc {
             Scene scene = new Scene(root);
             scene.getStylesheets().add("Wallet/StatusStyle.css");
             stage.setScene(scene);
-            if (stage.isShowing()) {
-                Platform.exit();
-            }
             stage.show();
         }
         catch (IOException e ) {
