@@ -11,7 +11,7 @@ public class jdbc {
     static String passWord;
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/wallet";
+    static final String DB_URL = "jdbc:mysql://35.198.245.135/wallet";
 
     static Connection connection;
 
@@ -31,7 +31,7 @@ public class jdbc {
             while (readline != null) {
                     String[] array = readline.split(";");
                     userName = array[0];
-                    passWord = array[1];
+                    passWord = "";
                 readline = reader.readLine();
             }
         } catch (Exception e) {
