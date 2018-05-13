@@ -59,7 +59,7 @@ public class WalletController extends jdbc {
     @FXML
     Label warning;
     @FXML
-    private Stage stage;
+    private static Stage stage;
 
     //private list of month.
     public void initialize() {
@@ -164,11 +164,7 @@ public class WalletController extends jdbc {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("TableUI.fxml"));
-            if (this.stage.isShowing()) {
-                stage.close();
-            } else{
-                this.stage = new Stage();
-        }
+            Stage stage = new Stage();
             stage.setTitle("Summary");
             Scene scene = new Scene(root);
             scene.getStylesheets().add("Wallet/TableStyle.css");
