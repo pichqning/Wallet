@@ -11,6 +11,11 @@ import static Wallet.jdbc.closeConnection;
 import static Wallet.jdbc.openConnection;
 import static Wallet.jdbc.connection;
 
+/**
+ * Controller for Status window , contain 4 textareas income , outcome , balance , and saving.
+ * @author Pichaaun Popukdee ,Raksani Kunamas.
+ */
+
 public class StatusController implements Initializable {
 
     @FXML
@@ -30,7 +35,10 @@ public class StatusController implements Initializable {
         setBox();
     }
 
-//    method get total amount from income or outcome or savings.
+    /**
+     * method get total amount from income or outcome or savings.
+     */
+
 //    public double getTotalFromColumn(String columnName, String tableName) {
     public double getTotalFromColumn(String tableName) {
         openConnection();
@@ -54,7 +62,9 @@ public class StatusController implements Initializable {
     }
 
 
-    //every time user clicked the submit button, setBox will be called.
+    /**
+     *  every time user clicked the submit button, setBox will be called.
+     */
     @FXML
     public void setBox() {
         incomeBox.setText(String.valueOf(getTotalFromColumn("income")));

@@ -30,7 +30,10 @@ import java.time.Year;
 import java.util.IllegalFormatException;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller for wallet main window.User can input the detail , amount and select date that want to record the data.
+ * @author Pichaaun Popukdee ,Raksani Kunamas.
+ */
 
 public class WalletController extends jdbc {
     @FXML
@@ -54,9 +57,9 @@ public class WalletController extends jdbc {
     @FXML
     Menu summary;
     @FXML
-    Button backButton;
-    @FXML
     Label warning;
+    @FXML
+    private Stage stage;
 
     //private list of month.
     public void initialize() {
@@ -85,24 +88,21 @@ public class WalletController extends jdbc {
     }
 
     public void InvalidInput() {
-
-        warning.setText("Invalid input.");
-        System.out.println("invalid input");
-//        if (detail.getText()==null || amount.getText()==null)  {
-//               warning.setText("Please input detail and amount.");
-//            }
-        //check date unmatch with year (leap year for february) 2020 2024 2028
-        //check date unmatch with month (30/31 days)
-//        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
-//               warning.setText("Invalid date.");
-//            }
-        //input only number for amount
-        try {
-            if (amount.getText().length() > 0) Integer.parseInt(amount.getText());
-        } catch (IllegalFormatException e) {
-            warning.setText("Cannot record the data.");
+        if (detail.getText().length()==0|| amount.getText().length()==0)  {
+            warning.setText("Please input detail and amount.");
         }
-    }
+        // check date unmatch with year (leap year for february) 2020 2024 2028
+        //check date unmatch with month (30/31 days)
+        if (date.getSelectionModel().getSelectedItem() > month.getSelectionModel().getSelectedItem().length(Year.isLeap(year.getSelectionModel().getSelectedItem()))) {
+            warning.setText("Invalid date."); }
+            //input only number for amount
+        try {
+            double a = Double.parseDouble(amount.getText());
+        } catch (IllegalFormatException e) {
+                warning.setText("Cannot record the data.");
+        }
+        }
+
     public void setAllDefault() {
         warning.setText("");
         detail.setText("");
@@ -110,10 +110,8 @@ public class WalletController extends jdbc {
     }
 
     public void handleRecord(ActionEvent event) {
+         InvalidInput();
         try {
-            if (detail == null || amount.getText() == null) {
-                InvalidInput();
-            }
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
                 submitRecord("income", amount.getText(), detail.getText(), convertDate(), "income");
@@ -132,11 +130,14 @@ public class WalletController extends jdbc {
         } catch (Exception e) {
             System.out.println("Cannot Recording");
             InvalidInput();
+            }
+
         }
 
-    }
 
-    //convert selected items to Localdate format.
+    /**
+     * convert selected items to Localdate format.
+     */
     public LocalDate convertDate() {
         LocalDate localDate = null;
         int Year = year.getSelectionModel().getSelectedItem();
@@ -154,12 +155,20 @@ public class WalletController extends jdbc {
         System.exit(1);
     }
 
+    /**
+     * Open table scene.
+     * @param event
+     */
     @FXML
     public void openTable(ActionEvent event) {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("TableUI.fxml"));
-            Stage stage = new Stage();
+            if (this.stage.isShowing()) {
+                stage.close();
+            } else{
+                this.stage = new Stage();
+        }
             stage.setTitle("Summary");
             Scene scene = new Scene(root);
             scene.getStylesheets().add("Wallet/TableStyle.css");
@@ -173,7 +182,9 @@ public class WalletController extends jdbc {
     }
 
 
-
+    /**
+     * Open status window.
+     */
     @FXML
     public void openStatus(ActionEvent event) {
         Parent root;
@@ -184,17 +195,13 @@ public class WalletController extends jdbc {
             Scene scene = new Scene(root);
             scene.getStylesheets().add("Wallet/StatusStyle.css");
             stage.setScene(scene);
-            if (stage.isShowing()) {
-                Platform.exit();
-            }
             stage.show();
-
-
         }
         catch (IOException e ) {
             e.printStackTrace();
         }
     }
+
 }
 
 

@@ -6,6 +6,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+//TODO write javadoc.
+
 public class jdbc {
     static String userName;
     static String passWord;

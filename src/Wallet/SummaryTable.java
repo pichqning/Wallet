@@ -1,5 +1,9 @@
 package Wallet;
 
+/**
+ //TODO write javadoc.
+ * @author Pichaaun Popukdee ,Raksani Kunamas.
+ */
 
 public class SummaryTable {
 
