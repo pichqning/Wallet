@@ -88,7 +88,7 @@ public class WalletController extends jdbc {
     }
 
     public void InvalidInput() {
-        if (detail.getText().length()==0|| amount.getText().length()==0)  {
+        if (detail.getText().isEmpty()|| amount.getText().isEmpty())  {
             warning.setText("Please input detail and amount.");
         }
         // check date unmatch with year (leap year for february) 2020 2024 2028
@@ -97,7 +97,7 @@ public class WalletController extends jdbc {
             warning.setText("Invalid date."); }
             //input only number for amount
         try {
-            double a = Double.parseDouble(amount.getText());
+            Double.parseDouble(amount.getText());
         } catch (IllegalFormatException e) {
                 warning.setText("Cannot record the data.");
         }
@@ -110,19 +110,22 @@ public class WalletController extends jdbc {
     }
 
     public void handleRecord(ActionEvent event) {
-         InvalidInput();
         try {
             System.out.println("Recording...");
             if (categories.getSelectionModel().getSelectedItem().equals("Income")) {
+                InvalidInput();
                 submitRecord("income", amount.getText(), detail.getText(), convertDate(), "income");
                 System.out.println("Submitting to income.");
             } else if (categories.getSelectionModel().getSelectedItem().equals("Outcome")) {
+                InvalidInput();
                 submitRecord("outcome", amount.getText(), detail.getText(), convertDate(),"outcome");
                 System.out.println("Submitting to outcome.");
             } else if (categories.getSelectionModel().getSelectedItem().equals("Saving")) {
+                InvalidInput();
                 submitRecord("saving", amount.getText(), detail.getText(), convertDate(),"saving");
                 System.out.println("Submitting to savings.");
             } else {
+                InvalidInput();
                 System.out.println("Else");
             }
             openStatus(event);

@@ -108,13 +108,6 @@ public class TableController implements Initializable {
                         savingResultSet.getString("detail"), savingResultSet.getString("type"));
                 tableList.add(savingSummaryTable);
             }
-//            Comparator<SummaryTable> summaryTableComparator = new Comparator<SummaryTable>() {
-//                @Override
-//                public int compare(SummaryTable o1, SummaryTable o2) {
-//                    return o2.getDate().compareTo(o1.getDate());
-//                }
-//            };
-//            tableList.sort(summaryTableComparator);
         } catch (SQLException e) {
             e.printStackTrace();
         }

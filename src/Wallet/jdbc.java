@@ -9,8 +9,8 @@ import java.util.ArrayList;
 //TODO write javadoc.
 
 public class jdbc {
-    static String userName;
-    static String passWord;
+    static String userName = "root";
+    static String passWord = "";
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://35.198.245.135/wallet";
@@ -42,11 +42,12 @@ public class jdbc {
     }
 
     public static void openConnection() {
-        readFile();
+        //readFile();
         try {
             Class.forName(JDBC_DRIVER);
             connection = DriverManager.getConnection(DB_URL, userName, passWord);
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             System.err.println("Cannot establish SQL connection");
         }
     }
