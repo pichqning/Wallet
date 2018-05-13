@@ -2,6 +2,10 @@ package Wallet;
 
 import java.util.ArrayList;
 
+/**
+ * TODO write javadoc.
+ */
+
 public class Wallet {
     private ArrayList listIncome = new ArrayList();
     private ArrayList listOutcome = new ArrayList();

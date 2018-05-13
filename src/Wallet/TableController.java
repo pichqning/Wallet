@@ -68,6 +68,9 @@ public class TableController implements Initializable {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+    /**
+     * load data from database and put data in the table.
+     */
     @FXML
     public void loadDataFromDB() {
         ObservableList<SummaryTable> tableList = null;
@@ -125,16 +128,20 @@ public class TableController implements Initializable {
         tableView.setItems(tableList);
     }
 
-    @FXML
-    public void clear() {
 
-    }
-
+    /**
+     * When user select the row on table and click remove button. The data will be deleted.
+     */
     @FXML
     public void remove(){
         removeRecord(tableView.getSelectionModel().getSelectedItem().getType(),"id",tableView.getSelectionModel().getSelectedItem().getId());
         loadDataFromDB();
     }
+
+    /**
+     * Open new chart window.
+     * @param event
+     */
     @FXML
     public void openGraph(ActionEvent event) {
         Parent root;

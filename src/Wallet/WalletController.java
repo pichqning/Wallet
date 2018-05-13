@@ -30,7 +30,11 @@ import java.time.Year;
 import java.util.IllegalFormatException;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller for wallet main window.User can input the detail , amount and select date that want to record the data.
+ *
+ * @author Pichaaun Popukdee ,Raksani Kunamas.
+ */
 
 public class WalletController extends jdbc {
     @FXML
@@ -53,8 +57,6 @@ public class WalletController extends jdbc {
     MenuItem table;
     @FXML
     Menu summary;
-    @FXML
-    Button backButton;
     @FXML
     Label warning;
 
@@ -122,12 +124,13 @@ public class WalletController extends jdbc {
             } else {
                 System.out.println("Else");
             }
+            openStatus(event);
             setAllDefault();
         } catch (Exception e) {
             System.out.println("Cannot Recording");
             InvalidInput();
             }
-        openStatus(event);
+
         }
 
 
@@ -167,8 +170,6 @@ public class WalletController extends jdbc {
         }
     }
 
-
-
     @FXML
     public void openStatus(ActionEvent event) {
         Parent root;
@@ -183,8 +184,6 @@ public class WalletController extends jdbc {
                 Platform.exit();
             }
             stage.show();
-
-
         }
         catch (IOException e ) {
             e.printStackTrace();
