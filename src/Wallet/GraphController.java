@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 import static Wallet.TableController.*;
 
 /**
- *
+ * Controller for graphUI, this class has method for add income and outcome value and show in linechart. User can select year that want linechart show .
  * @author Pichaaun Popukdee , Raksani Kunamas
  */
 
@@ -34,10 +34,10 @@ public class GraphController implements Initializable {
     private double out1 ,out2 ,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12 =0;
     private double in1,in2,in3,in4,in5,in6,in7,in8,in9,in10,in11,in12 = 0 ;
 
-
-
-
-
+    /**
+     * Method for close button.
+     * @param event
+     */
     @FXML
     public void close(ActionEvent event) {
         ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -73,7 +73,7 @@ public class GraphController implements Initializable {
 
 
     /**
-     * Method for create outcome line.
+     * Create outcome line from dataList which contain outcome amount.
      */
     private void loadChartOutcome() {
         dataSeries.getData().clear();
@@ -82,7 +82,6 @@ public class GraphController implements Initializable {
 
         for (int i = 0 ; i< dateList.size() ; i++) {
             year = dateList.get(i).split("-");
-            System.out.println("datalist " + datalist.get(i));
             if (thisYear(year[0])) addToOutcomeMonth(year[1] , datalist.get(i));
         }
 
@@ -154,7 +153,7 @@ public class GraphController implements Initializable {
 
     /**
      *
-     * 
+     * Add income value from datalist to parameter we created for keep the income value each month.
      * @param month
      * @param data
      *
@@ -174,6 +173,12 @@ public class GraphController implements Initializable {
         else if (month.equals("12")) in12 += data;
     }
 
+    /**
+     * Add income value from datalist to parameter we created for keep the income value each month.
+     * @param month
+     * @param data
+     *
+     */
     private void addToOutcomeMonth ( String month , double data) {
         if (month.equals("01")) out1 += data;
         else if (month.equals("02")) out2 += data;

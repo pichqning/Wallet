@@ -9,21 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
-import java.nio.file.LinkOption;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,6 +26,10 @@ import static Wallet.jdbc.connection;
 import static Wallet.jdbc.openConnection;
 import static Wallet.jdbc.removeRecord;
 
+/**
+ * Controller for summary table ,contain with Id column , date column , detail column , amount column and type column.
+ * @author Pichaaun Popukdee .Raksani Kunamas.
+ */
 public class TableController implements Initializable {
 
     @FXML
