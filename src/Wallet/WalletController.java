@@ -134,7 +134,9 @@ public class WalletController extends jdbc {
         }
 
 
-    //convert selected items to Localdate format.
+    /**
+     * convert selected items to Localdate format.
+     */
     public LocalDate convertDate() {
         LocalDate localDate = null;
         int Year = year.getSelectionModel().getSelectedItem();
@@ -152,6 +154,10 @@ public class WalletController extends jdbc {
         System.exit(1);
     }
 
+    /**
+     * Open table scene.
+     * @param event
+     */
     @FXML
     public void openTable(ActionEvent event) {
         Parent root;
@@ -170,6 +176,10 @@ public class WalletController extends jdbc {
         }
     }
 
+
+    /**
+     * Open status window.
+     */
     @FXML
     public void openStatus(ActionEvent event) {
         Parent root;
@@ -189,6 +199,7 @@ public class WalletController extends jdbc {
             e.printStackTrace();
         }
     }
+
 }
 
 
