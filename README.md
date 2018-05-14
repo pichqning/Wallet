@@ -12,3 +12,5 @@
 ## Details
 ![2](https://user-images.githubusercontent.com/32285892/39990274-5bd3775e-5796-11e8-8382-f7e70db1095a.JPG)
 
+## UML
+![walletuml](https://user-images.githubusercontent.com/32285892/39990880-fb3357a0-5797-11e8-9ea3-39b715bd17cd.jpg)
